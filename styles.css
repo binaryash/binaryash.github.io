@@ -1,0 +1,72 @@
+body { background: #212529 !important;}
+
+.display-1 {
+    text-align: center;
+    padding-top: 2%;
+  }
+
+.desc1 {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    padding-top: 2%;
+}
+
+.desc2 {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    padding-top: 4%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 6%;
+}
+
+.footer1 {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: small;
+}
+
+.links1{
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+
+}
+
+.contactbody1{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 3%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 3%;
+}
+
+.contactbody2{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 3%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 3%;
+}
+
+.aboutbody1{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 4%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 4%;
+
+}
+
+.aboutbody2{
+    
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 4%;
+    padding-left: 40%;
+    padding-right: 20%;
+    padding-bottom: 4%;
+
+}
+
