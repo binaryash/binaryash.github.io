@@ -1,8 +1,10 @@
-title: BinaryAsh 
+title: BinaryAsh
 author: Binary Ash
 url: https://www.binaryash.github.io # root address of the site
 description: > # description of the site (multiple lines allowed)
-  Hi I'm Ash, welcome to my portfolio! Explore my work in web development, data science, machine learning, graphic design, and embedded systems. I am available for job opportunities and collaborative projects.
+  Hi I'm Ash, also called Ash-The-Coder & BinaryAsh
+
+  Welcome to my portfolio! Explore my work in web development, data science, machine learning, graphic design, and embedded systems. I am available for job opportunities and collaborative projects.
 
 permalink: /:slug
 
