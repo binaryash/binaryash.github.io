@@ -7,7 +7,7 @@ Hey there! I'm Ash, a passionate and versatile professional with expertise in we
 ## My Skills
 
 - **Languages** : Python, C, C++, Javascript, SQL, Latex
-- **Frameworks** : Django, Flask, Tailwind, React.js, Express.js, Node.js, Selenium,
+- **Frameworks** : Django, Flask, Tailwind, React.js, Express.js, Node.js, Selenium
 - **Tools** : Git/Github, Linux, Vim, Emacs, Excel, Redis, BeautifulSoup 
 - **Libraries** : Pandas, Numpy, Matplotlib, Seaborn, Plotly, Sci-kit learn, Celery
 - **Domains** : Web Development, Data Science, Machine Learning, Graphic Design, Embedded Systems
