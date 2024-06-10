@@ -9,41 +9,46 @@ navbar_entries:
     url: https://binaryash.github.io
 
 project_entries:
-  - title: Project 1
-    url: overview-post
-    desc: This is an example project, configured in _data/home.yml
+  - title: Dashboard App
+    url: https://github.com/binaryash/Dashboard-App
+    desc: Enhance productivity with news, tasks, notes, events, reminders.
 
-  - title: Project 2
-    url: overview-post
-    desc: Projects are shown in card layout
+  - title: Simple Projects
+    url: https://github.com/binaryash/simple_projects
+    desc: Explore diverse, beginner-friendly coding projects with explanations and documentation.
 
-  - title: Project 3
-    url: overview-post
-    desc: You can control visibility from _config.yml file
+  - title: Django Blog
+    url: https://github.com/binaryash/django_blog
+    desc: Blog Website built with Django.
 
-  - title: Project 4
-    url: overview-post
-    desc: This project uses highlight markup, configured in _data/home.yml
+  - title: Attd Calc
+    url: attendance_calculator
+    desc: Attendance calculator built with Django, tracks student attendance and remaining hours.
     highlight: WIP
 
-  - title: Project 5
-    url: overview-post
-    desc: Moonwalk also has horizontal list (used in header and footer)
+  - title: Taskmanager
+    url: https://github.com/binaryash/taskmanager
+    desc: Built with Django REST API for data scraping with Celery, Selenium.
     highlight: WIP
 
-  - title: Project 6
-    url: overview-post
-    desc: It also has a scalable vertical list (in case you need it)
+  - title: DataUp
+    url: https://codeman7462.eu.pythonanywhere.com/
+    desc: Django web app analyzes Excel/CSV files, generates summary reports.
+    highlight: WIP
 
-old_project_entries:
-  - title: Sample 1
-    url: https://example.com
-    desc: Delight your readers - add beautiful share and like buttons easily to your websites 
-    highlight: NEW
+#  - title: Project 6
+#    url: overview-post
+#    desc: It also has a scalable vertical list (in case you need it)
 
-  - title: Sample2
-    url: https://example.com
-    desc: An open source landing website with supporting pages and integrated blog
+#old_project_entries:
+#  - title: Sample 1
+#    url: https://example.com
+#    desc: Delight your readers - add beautiful share and like buttons easily to your websites 
+#    highlight: NEW
+
+#  - title: Sample2
+#    url: https://example.com
+#    desc: An open source landing website with supporting pages and integrated blog
 
 footer_entries:
   - title: ash's homepage
