@@ -21,8 +21,8 @@ project_entries:
     url: https://github.com/binaryash/django_blog
     desc: Blog Website built with Django.
 
-  - title: Attd Calc
-    url: attendance_calculator
+  - title: AttendEase
+    url: attendease
     desc: Attendance calculator built with Django, tracks student attendance and remaining hours.
     highlight: WIP
 

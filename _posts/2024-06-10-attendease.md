@@ -4,7 +4,7 @@ author: Binary Ash
 tags: [django]
 ---
 
-# Attendance Calculator
+# AttendEase
 
 * [Github](https://github.com/binaryash/attendance_calculator)   
 * [Demo](http://codeman9247.eu.pythonanywhere.com/)
