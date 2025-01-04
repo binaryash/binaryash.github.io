@@ -22,6 +22,10 @@ const presentation: Presentation = {
       label: "Github",
       link: "https://github.com/binaryash",
     },
+    {
+      label: "Linkedin",
+      link: "https://www.linkedin.com/in/ash-c-7b3113291",
+    },
   ],
 };
 
