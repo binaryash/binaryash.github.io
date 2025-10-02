@@ -5,76 +5,119 @@ import SocialLinks from "@/components/SocialLinks.astro";
 import Link from "@/components/shared/Link.astro";
 import presentation from "@/data/presentation";
 
-// Optional: add any content for your About page
+// Import the custom CSS file
+import "@/styles/about.css";
 ---
 
 <Layout>
   <main class="flex flex-col gap-20">
-    <article class="flex flex-col gap-8 md:flex-row-reverse md:justify-end md:gap-12">
-      {
-        presentation.profile && (
+
+    <article class="flex flex-col gap-8">
+      {/* Row container for About text and Image with updated classes */}
+      <div class="about-image-row">
+        {/* About text with constrained width */}
+        <div class="about-text">
+          <h1 class="section-heading">About</h1>
+
+          <h2 class="description-text">
+            Hey there! I'm Ash, a passionate and versatile professional with expertise in web development, data science, machine learning, graphic design, and embedded systems. I love creating innovative digital solutions that make a difference.
+          </h2>
+        </div>
+
+        {/* Profile Image to the right on medium+ screens */}
+        {presentation.profile && (
           <Image
             src={presentation.profile}
-            class="w-1/4 self-center rounded-full"
+            class="profile-image"
             alt="Ash's Profile"
             width="200"
             height="200"
           />
-        )
-      }
+        )}
+      </div>
 
+      {/* My Skills and other sections below the above row */}
       <div class="flex flex-col gap-8">
-        <h1 class="text-3xl text-neutral-100">About</h1>
+        <h1 class="section-heading">My Skills</h1>
 
-        <h2 class="w-auto max-w-[100ch] leading-6">
-          Hey there! I’m Ash, a passionate and versatile professional with expertise in web development, data science, machine learning, graphic design, and embedded systems. I love creating innovative digital solutions that make a difference.
-        </h2>
+        <div class="skills-grid">
+          {/* Languages Card */}
+          <div class="skill-card-wrapper">
+            <div class="skill-card">
+              <h3 class="skill-card-title">Languages</h3>
+              <div class="flex flex-wrap gap-2">
+                {["Python", "C", "C++", "JavaScript", "SQL", "LaTeX"].map(skill => (
+                  <span class="skill-tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        <h1 class="text-3xl text-neutral-100">My Skills</h1>
+          {/* Frameworks Card */}
+          <div class="skill-card-wrapper">
+            <div class="skill-card">
+              <h3 class="skill-card-title">Frameworks</h3>
+              <div class="flex flex-wrap gap-2">
+                {["Django", "Flask", "FastAPI", "React.js", "Express.js", "Node.js", "Selenium"].map(skill => (
+                  <span class="skill-tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        <h3 class="w-auto max-w-[100ch] leading-6">
-<table border="1">
-  <tbody>
-    <tr>
-      <td><strong>Languages:</strong></td>
-      <td>Python, C, C++, Javascript, SQL, Latex</td>
-    </tr>
-    <tr>
-      <td><strong>Frameworks:</strong></td>
-      <td>Django, Flask, FastAPI, React.js, Express.js, Node.js, Selenium</td>
-    </tr>
-    <tr>
-      <td><strong>Tools:</strong></td>
-      <td>Git/Github, Linux, Vim, Emacs, Excel, Redis, BeautifulSoup, MongoDB</td>
-    </tr>
-    <tr>
-      <td><strong>Libraries:</strong></td>
-      <td>Pandas, Numpy, Matplotlib, Seaborn, Plotly, Sci-kit learn, Celery, Django Channels</td>
-    </tr>
-    <tr>
-      <td><strong>Domains:</strong></td>
-      <td>Web Development, Data Science, Machine Learning, Graphic Design, Embedded Systems</td>
-    </tr>
-  </tbody>
-</table>
+          {/* Tools Card */}
+          <div class="skill-card-wrapper">
+            <div class="skill-card">
+              <h3 class="skill-card-title">Tools</h3>
+              <div class="flex flex-wrap gap-2">
+                {["Git/GitHub", "Linux", "Vim", "Emacs", "Excel", "Redis", "BeautifulSoup", "MongoDB"].map(skill => (
+                  <span class="skill-tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        </h3>
+          {/* Libraries Card */}
+          <div class="skill-card-wrapper">
+            <div class="skill-card">
+              <h3 class="skill-card-title">Libraries</h3>
+              <div class="flex flex-wrap gap-2">
+                {["Pandas", "NumPy", "Matplotlib", "Seaborn", "Plotly", "Scikit-learn", "Celery", "Django Channels"].map(skill => (
+                  <span class="skill-tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        <h1 class="text-3xl text-neutral-100">My Approach and Workflow</h1>
+          {/* Domains Card (spans full width) */}
+          <div class="skill-card-wrapper domain-wrapper">
+            <div class="skill-card">
+              <h3 class="skill-card-title">Domains</h3>
+              <div class="flex flex-wrap gap-2">
+                {["Web Development", "Data Science", "Machine Learning", "Graphic Design", "Embedded Systems"].map(skill => (
+                  <span class="skill-tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <h2 class="w-auto max-w-[100ch] leading-6">
-          I focus on delivering high-quality, user-centric solutions that meet business goals and enhance user experience. By thoroughly understanding client needs, I plan strategically and combine creativity with technical expertise to build scalable solutions. Proficient in CI/CD, I automate deployment for faster, reliable delivery. I embrace iterative development, continuous improvement, and collaboration to ensure the best outcomes for every project.
-        </h2>
+        <div class="approach-workflow flex flex-col gap-4">
+          <h1 class="section-heading">My Approach and Workflow</h1>
 
+          <h2 class="description-text">
+            I focus on delivering high-quality, user-centric solutions that meet business goals and enhance user experience. By thoroughly understanding client needs, I plan strategically and combine creativity with technical expertise to build scalable solutions. Proficient in CI/CD, I automate deployment for faster, reliable delivery. I embrace iterative development, continuous improvement, and collaboration to ensure the best outcomes for every project.
+          </h2>
+        </div>
       </div>
     </article>
 
     <article class="flex flex-col gap-8">
       <header class="flex w-full flex-row justify-between gap-2">
-        <h3 class="text-lg text-neutral-100">Contact Me</h3>
+        <h3 class="contact-header">Contact Me</h3>
       </header>
       <p>
-        Feel free to reach out at <Link href={`mailto:binaryash@hotmail.com`} label="binaryash@hotmail.com" /> to discuss potential collaborations or job opportunities. Let’s connect and make magic happen!
+        Feel free to reach out at <Link href={`mailto:binaryash@hotmail.com`} label="binaryash@hotmail.com" /> to discuss potential collaborations or job opportunities. Let's connect and make magic happen!
       </p>
 
       <SocialLinks />
