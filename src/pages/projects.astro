@@ -1,0 +1,53 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectSection from "@/components/ProjectSection.astro";
+import SocialLinks from "@/components/SocialLinks.astro";
+import Link from "@/components/shared/Link.astro";
+import projects from "@/data/projects";
+import presentation from "@/data/presentation";
+
+// Import BOTH CSS files
+import "@/styles/about.css";
+import "@/styles/projects.css";
+---
+
+<Layout>
+  <main class="flex flex-col gap-20">
+    <article class="flex flex-col gap-8">
+      <div class="flex flex-col gap-8">
+        <h1 class="section-heading">Projects</h1>
+
+        <h2 class="description-text">
+          Here's a showcase of my work spanning various technologies and domains. Each project represents a unique challenge and demonstrates different aspects of modern web development, from full-stack applications to machine learning implementations.
+        </h2>
+
+        <div class="projects-grid">
+          {projects.length === 0 && (
+            <p class="text-neutral-400">No projects available yet. Check back soon!</p>
+          )}
+
+          {projects.map((project) => (
+            <ProjectSection {...project} />
+          ))}
+        </div>
+
+        <h1 class="section-heading">Open to Collaboration</h1>
+
+        <h2 class="description-text">
+          I'm always excited to work on innovative projects that push boundaries and create meaningful impact. Whether it's web development, data science, or embedded systems, I bring a comprehensive skill set and passion for solving complex problems. Let's build something amazing together!
+        </h2>
+      </div>
+    </article>
+
+    <article class="flex flex-col gap-8">
+      <header class="flex w-full flex-row justify-between gap-2">
+        <h3 class="contact-header">Contact Me</h3>
+      </header>
+      <p>
+        Feel free to reach out at <Link href={`mailto:${presentation.mail}`} label={presentation.mail} /> to discuss potential collaborations or project opportunities. Let's connect and make magic happen!
+      </p>
+
+      <SocialLinks />
+    </article>
+  </main>
+</Layout>
