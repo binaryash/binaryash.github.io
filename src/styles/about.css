@@ -114,23 +114,26 @@ p {
 .about-image-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 3rem; /* Increased gap */
+  gap: 2rem;
   align-items: flex-start;
   margin-bottom: 2rem;
 }
 
 .about-text {
-  flex: 0 1 55%;
-  max-width: 100ch; /* Reduced width for better alignment */
+  flex: 1 1 0%;
+  min-width: 300px;
+  max-width: 60ch;
 }
 
 .about-text > .section-heading {
-  padding-bottom: 1rem; /* Or use margin-bottom as preferred */
+  padding-bottom: 1rem;
 }
 
 .profile-image {
-  flex: 0 0 40%;
-  max-width: 200px;
+  flex: 0 0 auto;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
 }
