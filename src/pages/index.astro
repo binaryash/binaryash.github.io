@@ -28,18 +28,17 @@ const posts = (await getCollection("posts"))
     <article
       class="flex flex-col gap-8 md:flex-row-reverse md:justify-end md:gap-12"
     >
-      {
-        presentation.profile && (
-          <Image
-            src={presentation.profile}
-            class="w-1/4 self-center rounded"
-            alt="Your Profile"
-            width="200"
-            height="200"
-          />
-        )
-      }
-
+    {
+    presentation.profile && (
+        <Image
+        src={presentation.profile}
+        class="w-29 h-29 rounded-full md:w-1/4 md:h-auto md:rounded self-center object-cover"
+        alt="Your Profile"
+        width="200"
+        height="200"
+        />
+    )
+    }
       <div class="flex flex-col gap-8">
         <h1 class="text-4xl text-neutral-100">
           {presentation.title}
