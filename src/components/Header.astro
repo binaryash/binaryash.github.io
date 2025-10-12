@@ -1,62 +1,114 @@
 ---
-import removeTrailingSlash from "@/utils/removeTrailingSlash";
-import presentation from "@/data/presentation";
+import { Home, FileText, Briefcase, User, Github, Mail, Code } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
-const pathname = removeTrailingSlash(Astro.url.pathname);
+const navItems = [
+  { href: "/", label: "Home", icon: Home },
+  { href: "/posts", label: "Posts", icon: FileText },
+  { href: "/projects", label: "Projects", icon: Briefcase },
+  { href: "/about", label: "About", icon: User },
+];
+const socialItems = [
+  { href: "https://github.com/yourusername", label: "GitHub", icon: Github },
+  { href: "mailto:mail@example.com", label: "Email", icon: Mail },
+  { href: "https://leetcode.com/yourusername", label: "LeetCode", icon: Code },
+  { href: "https://linkedin.com/in/yourusername", label: "LinkedIn", icon: Linkedin },
+];
+const pathname = Astro.url.pathname;
 ---
 
-<header class="z-40 flex w-full flex-col gap-2 md:flex-row md:justify-between">
-  <a href={`mailto:${presentation.mail}`} class="hover:text-neutral-100"
-    >{presentation.mail}</a
-  >
+<style>
+.dock-float {
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(22,22,25,0.78);
+  backdrop-filter: blur(17px);
+  box-shadow: 0 4px 22px 0 rgba(22,22,24,0.15);
+  border-radius: 1.5rem;
+  padding: 0.35rem 0.4rem;
+}
+.dock-sep {
+  width: 2px;
+  height: 1.45rem;
+  margin: 0 0.33rem;
+  background: rgba(120,120,135,0.22);
+  border-radius: 13px;
+}
+.dock-btn {
+  border-radius: 9999px;
+  height: 2.35rem;
+  width: 2.35rem;
+  background: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #d4d4d8;
+  transition: color .16s, box-shadow .15s, background .13s;
+  cursor: pointer;
+  margin: 0 1.5px;
+}
+.dock-btn.active {
+  background: rgba(55,55,62,0.91);
+  color: #fff;
+  box-shadow: 0 1px 7px 0 rgba(32,32,36,0.14);
+}
+.dock-btn:hover, .dock-btn:focus {
+  background: rgba(32,32,38,0.82);
+  color: #fff;
+}
+.dock-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: 110%;
+  transform: translateX(-50%);
+  padding: 0.26rem 0.55rem;
+  font-size: 0.81rem;
+  background: #191920eb;
+  color: #fafafc;
+  border-radius: 5px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .13s;
+}
+.dock-btn:focus .dock-tooltip,
+.dock-btn:active .dock-tooltip,
+.dock-btn:hover .dock-tooltip { opacity: 1; }
+@media(hover: none) and (pointer: coarse) {
+  .dock-btn:active .dock-tooltip { opacity: 1; }
+}
+</style>
 
-  <nav role="navigation">
-    <ul role="list" class="flex flex-row gap-4">
-      <li>
-        <a
-          href="/"
-          class:list={{
-            ["hover:text-neutral-100"]: true,
-            ["text-neutral-100 border-b-2 border-neutral-100 pb-1"]: pathname === "/",
-          }}>Home</a
-        >
-      </li>
-      <li>
-        <a
-          href="/posts"
-          class:list={{
-            ["hover:text-neutral-100"]: true,
-            ["text-neutral-100 border-b-2 border-neutral-100 pb-1"]: pathname === "/posts",
-          }}>Posts</a
-        >
-      </li>
-      <li>
-        <a
-          href="/projects"
-          class:list={{
-            ["hover:text-neutral-100"]: true,
-            ["text-neutral-100 border-b-2 border-neutral-100 pb-1"]: pathname === "/projects",
-          }}>Projects</a
-        >
-      </li>
-      <li>
-        <a
-          href="/about"
-          class:list={{
-            ["hover:text-neutral-100"]: true,
-            ["text-neutral-100 border-b-2 border-neutral-100 pb-1"]: pathname === "/about",
-          }}>About</a
-        >
-      </li>
-      <li>
-        <a
-          href="/ash-resume.pdf"
-          class:list={{
-            ["hover:text-neutral-100"]: true,
-            ["text-neutral-100 border-b-2 border-neutral-100 pb-1"]: pathname === "/resume",
-          }}>Resume</a
-        >
-      </li>
-    </ul>
-  </nav>
-</header>
+<div class="fixed bottom-5 dock-float left-1/2 max-w-md w-auto flex items-center justify-center pointer-events-auto z-50 border border-neutral-700/27">
+  {navItems.map(item => (
+    <a
+      href={item.href}
+      class:list={["dock-btn", pathname === item.href && "active"]}
+      aria-label={item.label}
+      tabIndex={0}
+    >
+      <item.icon size={19} />
+      <span class="dock-tooltip">
+        {pathname === item.href ? `On ${item.label}` : `Go to ${item.label}`}
+      </span>
+    </a>
+  ))}
+  <span class="dock-sep"></span>
+  {socialItems.map(item => (
+    <a
+      href={item.href}
+      class="dock-btn"
+      aria-label={item.label}
+      target={item.href.startsWith('http') ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      tabIndex={0}
+    >
+      <item.icon size={19} />
+      <span class="dock-tooltip">{`Go to ${item.label}`}</span>
+    </a>
+  ))}
+</div>
