@@ -8,16 +8,9 @@ This contains everything you need to run your app locally.
 
 View your app in AI Studio: https://ai.studio/apps/drive/1fz2JWIZvMx6r-nD0NzcssTEtbh1If4o3
 
-<<<<<<< HEAD
-- You can modify all the information in the files in the `data` folder (presentation, social links, projects list, colors).
-- You can write articles in `markdown` format in the `content/posts` folder.
-.
-## 🧞 Commands
-=======
 ## Run Locally
 
 **Prerequisites:**  Node.js
->>>>>>> 05d5830 (added resume)
 
 
 1. Install dependencies:
