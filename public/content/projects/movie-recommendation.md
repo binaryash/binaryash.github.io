@@ -1,17 +1,8 @@
 ## Recommendation Engine
+A sophisticated hybrid system designed to solve the "cold start" problem and provide highly personalized content discovery. It blends traditional statistical methods with modern deep learning.
 
-A sophisticated hybrid recommendation system combining collaborative filtering, content-based filtering, and neural network models for personalized movie suggestions.
-
-### Approach
-
-The system leverages user behavior data along with movie metadata to generate recommendations. Neural networks learn complex user-item interaction patterns.
-
-### Features
-
-*   **Hybrid Filtering**: Combines multiple recommendation strategies for better accuracy.
-*   **Feature Engineering**: Extracts meaningful features from movie metadata.
-*   **Evaluation Metrics**: Comprehensive performance assessment using standard metrics.
-
-### Performance
-
-The hybrid approach outperforms single-method systems by capturing both user preferences and content similarities.
+### Hybrid Approach
+* **Collaborative Filtering**: Analyzes user behavior patterns to find similarities between users and items.
+* **Content-Based Filtering**: Leverages movie metadata (genres, directors, cast) to recommend similar content.
+* **Neural Network Model**: Implemented a deep learning layer that learns complex, non-linear interactions between users and movies, significantly improving prediction accuracy.
+* **Evaluation & Metrics**: The system was rigorously tested using metrics like RMSE and MAE to ensure that recommendations remain both accurate and diverse, capturing the nuance of individual user tastes.
