@@ -1,5 +1,4 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
 import { config } from '../config';
 import { SocialButton } from '../components/SocialButton';
 import { ProjectCard } from '../components/ProjectCard';
@@ -21,7 +20,7 @@ export const HomeView: React.FC<{ onNavigate: (view: ViewState) => void; onProje
           </h2>
           <div className="pt-4">
             <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-xl">
-               I craft minimal, high-performance digital experiences with React and TypeScript.
+              I architect, build, and deploy end-to-end intelligent systems. Specialized in Full-Stack, AI, and Embedded Engineering—from concept to production.
             </p>
           </div>
         </div>
@@ -32,12 +31,14 @@ export const HomeView: React.FC<{ onNavigate: (view: ViewState) => void; onProje
              ))}
           </div>
           
-          <button 
-            onClick={() => onNavigate('projects')}
-            className="w-fit flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 border-b border-neutral-900 dark:border-neutral-100 pb-0.5 hover:text-accent hover:border-accent dark:hover:text-accent dark:hover:border-accent transition-colors"
-          >
-            View Projects <ArrowRight size={16} />
-          </button>
+          <div className="flex items-center gap-6">
+            <button 
+              onClick={() => onNavigate('projects')}
+              className="w-fit flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 border-b border-neutral-900 dark:border-neutral-100 pb-0.5 hover:text-accent hover:border-accent dark:hover:text-accent dark:hover:border-accent transition-colors"
+            >
+              View Projects <ArrowRight size={16} />
+            </button>
+          </div>
         </div>
       </section>
 

@@ -3,29 +3,34 @@ import { SiteConfig } from "./types";
 export const config: SiteConfig = {
   profile: {
     name: "Binary Ash",
-    title: "Full-Stack Developer & Data Scientist",
+    title: "Full-Stack, AI & Embedded Engineer",
     avatar: "/image.png",
     email: "binaryash@hotmail.com",
-    bio: `
-Hi, I'm a full-stack web developer specializing in **Django**. I also have expertise in the **MERN stack**, **FastAPI**, **Machine Learning** and **Data Analysis**.
-
-I focus on delivering high-quality, user-centric solutions that meet business goals and enhance user experience. My work spans web development, data science, machine learning, graphic design, and embedded systems.
-
-When I'm not optimizing web apps, you can find me tackling pointers and memory leaks in **C++** —because low-level control has its own thrill.
-    `,
+    bioFile: "/content/profile/bio.md",
     skills: [
       "Python",
-      "Django",
+      "JavaScript",
+      "SQL",
+      "Git",
+      "Linux",
+      "Azure",
+      "Docker",
+      "CI/CD",
       "React.js",
-      "Node.js",
+      "Django",
       "FastAPI",
-      "MongoDB",
-      "Machine Learning",
-      "C++",
-      "Data Analysis",
-      "Web Sockets",
+      "Node.js",
+      "GenAI",
+      "LLMs",
+      "RAG",
+      "AI Agents",
+      "LangChain",
+      "Transformers",
+      "PyTorch",
+      "TensorFlow",
+      "PostgreSQL",
       "Redis",
-      "Express.js",
+      "Celery",
     ],
     socials: [
       {
@@ -38,9 +43,66 @@ When I'm not optimizing web apps, you can find me tackling pointers and memory l
         url: "https://www.linkedin.com/in/ash-c-7b3113291",
         icon: "Linkedin",
       },
+      {
+        platform: "Resume",
+        url: "/ash-resume.pdf",
+        icon: "FileText",
+      },
     ],
   },
   projects: [
+    {
+      id: "redbud-ems",
+      title: "Redbud - Employee Management System",
+      shortDescription: "Workforce platform with Gemini agents for contract assignment and RAG-based matching.",
+      coverImage: "https://picsum.photos/800/600?random=11",
+      date: "2024",
+      featured: true,
+      tags: ["Django", "React", "GenAI", "AI Agents", "RAG"],
+      contentFile: "/content/projects/redbud-ems.md",
+      links: {
+        repo: "https://github.com/binaryash/redbud",
+      },
+    },
+    {
+      id: "genai-foundation-models",
+      title: "GenAI and Foundation Models",
+      shortDescription: "From-scratch implementations of Transformers and GANs for NLP and Vision.",
+      coverImage: "https://picsum.photos/800/600?random=12",
+      date: "2024",
+      featured: true,
+      tags: ["Transformers", "GAN", "MLOps", "GenAI", "ML"],
+      contentFile: "/content/projects/genai-foundation-models.md",
+      links: {
+        repo: "https://github.com/binaryash/ml",
+      },
+    },
+    {
+      id: "job-fetcher",
+      title: "Job Fetcher",
+      shortDescription: "AI-powered job aggregator with automated extraction and resume generation.",
+      coverImage: "https://picsum.photos/800/600?random=13",
+      date: "2024",
+      featured: true,
+      tags: ["Python", "Django", "GenAI", "Web Scraping", "Next.js", "AI Agents"],
+      contentFile: "/content/projects/job-fetcher.md",
+      links: {
+        repo: "https://github.com/binaryash/job-fetcher",
+      },
+    },
+    {
+      id: "async-task-manager-v2",
+      title: "Asynchronous TaskManager",
+      shortDescription: "Distributed data scraping and summarization using Celery, Redis, and GenAI.",
+      coverImage: "https://picsum.photos/800/600?random=14",
+      date: "2023",
+      featured: true,
+      tags: ["Django REST", "Celery", "Redis", "GenAI", "MCP"],
+      contentFile: "/content/projects/async-task-manager-v2.md",
+      links: {
+        repo: "https://github.com/binaryash/taskmanager",
+      },
+    },
     {
       id: "college-management-system",
       title: "College Management System",
@@ -48,33 +110,9 @@ When I'm not optimizing web apps, you can find me tackling pointers and memory l
         "Full-stack college management platform with Django backend and React frontend.",
       coverImage: "https://picsum.photos/800/600?random=1",
       date: "2024",
-      featured: true,
+      featured: false,
       tags: ["Django", "React.js", "Python"],
-      markdownContent: `
-## Overview
-
-A comprehensive college management platform built with Django backend and React frontend. This system streamlines administrative tasks and provides an intuitive interface for managing academic operations.
-
-### Key Features
-
-*   **Student & Faculty Profiles**: Complete profile management with role-based access.
-*   **Course Management**: Create, update, and manage courses and enrollments.
-*   **Access Control**: Robust role-based permissions for administrators, faculty, and students.
-*   **Responsive UI**: Modern interface optimized for desktop and mobile devices.
-
-### Technical Stack
-
-Built using modern technologies focused on scalability and performance:
-
-*   Backend: Django, Django REST Framework, Python
-*   Frontend: React.js, Modern JavaScript
-*   Database: PostgreSQL/SQLite
-*   Authentication: JWT-based auth system
-
-### Implementation Highlights
-
-The system features a RESTful API architecture that separates concerns between frontend and backend. Implemented comprehensive validation and error handling to ensure data integrity across all operations.
-      `,
+      contentFile: "/content/projects/college-management-system.md",
       links: {
         demo: "https://college-frontend-liard.vercel.app/",
         repo: "https://github.com/binaryash/college-management-system",
@@ -87,30 +125,9 @@ The system features a RESTful API architecture that separates concerns between f
         "Real-time chat application using Django Channels and WebSockets.",
       coverImage: "https://picsum.photos/800/600?random=2",
       date: "2024",
-      featured: true,
+      featured: false,
       tags: ["Django", "Django Channels", "WebSockets"],
-      markdownContent: `
-## The Concept
-
-A modern real-time chat application leveraging Django Channels and WebSockets for instant messaging capabilities. Designed for scalability and low latency communication.
-
-### Core Features
-
-1.  **Multiple Chat Rooms**: Support for numerous concurrent chat rooms.
-2.  **Live Messaging**: Instant message delivery using WebSocket connections.
-3.  **Presence Indicators**: Real-time user online/offline status.
-4.  **Message Broadcasting**: Efficient message distribution to all room participants.
-
-### Technical Architecture
-
-Built on Django Channels with Redis as the channel layer backend. The async architecture ensures optimal performance even under high load.
-
-> "Real-time communication requires a fundamental shift in how we think about web applications."
-
-### Challenges Overcome
-
-Implementing connection management and ensuring message delivery reliability across disconnections were key challenges solved through careful state management and reconnection strategies.
-      `,
+      contentFile: "/content/projects/realtime-chat-app.md",
       links: {
         repo: "https://github.com/binaryash/django-chat-app",
       },
@@ -122,28 +139,9 @@ Implementing connection management and ensuring message delivery reliability acr
         "MERN-stack event management app for creating and managing events.",
       coverImage: "https://picsum.photos/800/600?random=3",
       date: "2023",
-      featured: true,
+      featured: false,
       tags: ["MongoDB", "Express.js", "React.js", "Node.js"],
-      markdownContent: `
-## Project Overview
-
-Full-featured event management platform built with the MERN stack. Enables organizers to create events and attendees to discover and register for events.
-
-### Key Capabilities
-
-*   **Event CRUD**: Complete create, read, update, delete operations for events.
-*   **User Authentication**: Secure login and registration system.
-*   **Ticketing System**: Integrated event registration and ticketing.
-*   **Search & Filter**: Advanced search functionality with multiple filter options.
-
-### Implementation Details
-
-The application uses JWT for authentication, MongoDB for flexible data storage, and React for a responsive, interactive user interface. Express.js handles the RESTful API endpoints efficiently.
-
-### User Experience
-
-Designed with both event organizers and attendees in mind, providing intuitive interfaces for creating events and browsing upcoming opportunities.
-      `,
+      contentFile: "/content/projects/event-management-mern.md",
       links: {
         repo: "https://github.com/binaryash/event-management-application",
       },
@@ -157,25 +155,7 @@ Designed with both event organizers and attendees in mind, providing intuitive i
       date: "2023",
       featured: false,
       tags: ["MiniLM", "GPT-2", "FAISS"],
-      markdownContent: `
-## Retrieval-Augmented Generation
-
-An advanced RAG pipeline combining MiniLM embeddings, FAISS vector store, and GPT-2 for context-aware text generation.
-
-### Components
-
-1.  **MiniLM Embeddings**: Efficient semantic text embeddings for document indexing.
-2.  **FAISS Vector Store**: High-performance similarity search across large document collections.
-3.  **GPT-2 Generation**: Context-conditioned text generation for improved responses.
-
-### Workflow
-
-Documents are indexed using MiniLM embeddings and stored in FAISS. User queries retrieve relevant context, which is then fed to GPT-2 for generating informed responses.
-
-### Applications
-
-This approach significantly improves response quality by grounding generation in retrieved factual information, reducing hallucinations common in pure language models.
-      `,
+      contentFile: "/content/projects/rag-project.md",
       links: {
         repo: "https://github.com/binaryash/ml/blob/main/unnamed/RAG_Project.ipynb",
       },
@@ -189,25 +169,7 @@ This approach significantly improves response quality by grounding generation in
       date: "2023",
       featured: false,
       tags: ["Neural Networks", "Hybrid Filtering"],
-      markdownContent: `
-## Recommendation Engine
-
-A sophisticated hybrid recommendation system combining collaborative filtering, content-based filtering, and neural network models for personalized movie suggestions.
-
-### Approach
-
-The system leverages user behavior data along with movie metadata to generate recommendations. Neural networks learn complex user-item interaction patterns.
-
-### Features
-
-*   **Hybrid Filtering**: Combines multiple recommendation strategies for better accuracy.
-*   **Feature Engineering**: Extracts meaningful features from movie metadata.
-*   **Evaluation Metrics**: Comprehensive performance assessment using standard metrics.
-
-### Performance
-
-The hybrid approach outperforms single-method systems by capturing both user preferences and content similarities.
-      `,
+      contentFile: "/content/projects/movie-recommendation.md",
       links: {
         repo: "https://github.com/binaryash/ml/blob/main/unnamed/movie_recommendation.ipynb",
       },
@@ -221,22 +183,7 @@ The hybrid approach outperforms single-method systems by capturing both user pre
       date: "2023",
       featured: false,
       tags: ["React.js", "Vite", "Ant Design"],
-      markdownContent: `
-## Streamlined Invoicing
-
-A modern, user-friendly invoice generation tool built with React, Vite, and Ant Design. Create professional invoices in minutes.
-
-### Features
-
-*   **PDF Export**: Generate and download invoices as PDF documents.
-*   **Client Management**: Maintain a database of clients and their information.
-*   **Item Lists**: Reusable item catalog for quick invoice creation.
-*   **Templates**: Pre-configured templates for common invoice types.
-
-### Design Philosophy
-
-Focus on simplicity and speed. The interface guides users through invoice creation with minimal clicks while maintaining professional output quality.
-      `,
+      contentFile: "/content/projects/invoice-generator.md",
       links: {
         demo: "https://invoice-generator-theta-one.vercel.app/",
       },
@@ -250,26 +197,7 @@ Focus on simplicity and speed. The interface guides users through invoice creati
       date: "2022",
       featured: false,
       tags: ["Celery", "Redis", "Django"],
-      markdownContent: `
-## Background Job Processing
-
-A robust asynchronous task management system utilizing Django, Celery, and Redis for handling background jobs efficiently.
-
-### Capabilities
-
-*   **Task Scheduling**: Schedule tasks for future execution.
-*   **Progress Tracking**: Monitor task execution status in real-time.
-*   **Retry Policies**: Automatic retry with configurable backoff strategies.
-*   **Dashboard**: Web interface for monitoring and managing tasks.
-
-### Architecture
-
-Celery workers process tasks asynchronously while Redis serves as the message broker. Django provides the web interface and task definition framework.
-
-### Use Cases
-
-Perfect for handling time-consuming operations like email sending, report generation, data processing, and API integrations without blocking the main application.
-      `,
+      contentFile: "/content/projects/async-task-manager.md",
       links: {
         repo: "https://github.com/binaryash/taskmanager",
       },
@@ -283,28 +211,31 @@ Perfect for handling time-consuming operations like email sending, report genera
       date: "2022",
       featured: false,
       tags: ["MongoDB", "Express.js", "React.js", "Node.js"],
-      markdownContent: `
-## E-Commerce Platform
-
-A Shopify-inspired product showcase application demonstrating e-commerce functionality using the MERN stack.
-
-### Features
-
-*   **Product Catalog**: Browse and display product listings with details.
-*   **Search & Filter**: Advanced product search with multiple filtering options.
-*   **Product Details**: Comprehensive product pages with images and descriptions.
-*   **Inventory Management**: Backend system for managing product data.
-
-### Technical Implementation
-
-Built with a modular architecture that separates concerns between product display, inventory management, and user interactions. MongoDB provides flexible schema for product data.
-      `,
+      contentFile: "/content/projects/shopify-mern.md",
       links: {
         repo: "https://github.com/binaryash/shopify_product_showcase",
       },
     },
   ],
   blog: [
+    {
+      id: "ai-agents-orchestration",
+      title: "Orchestrating Intelligence: The Rise of AI Agents",
+      excerpt: "Exploring multi-agent systems, tool-use patterns, and the Model Context Protocol (MCP).",
+      date: "Feb 05, 2026",
+      readTime: "7 min read",
+      tags: ["AI Agents", "Orchestration", "MCP", "LangGraph"],
+      contentFile: "/content/blog/ai-agents-orchestration.md",
+    },
+    {
+      id: "demystifying-genai",
+      title: "Demystifying Generative AI: From Transformers to Production",
+      excerpt: "A deep dive into self-attention, embeddings, and the engineering challenges of shipping AI.",
+      date: "Jan 20, 2026",
+      readTime: "6 min read",
+      tags: ["GenAI", "Transformers", "LLMs", "RAG"],
+      contentFile: "/content/blog/demystifying-genai.md",
+    },
     {
       id: "web-development-journey",
       title: "My Journey Through Full-Stack Development",
@@ -313,27 +244,7 @@ Built with a modular architecture that separates concerns between product displa
       date: "Nov 15, 2024",
       readTime: "5 min read",
       tags: ["Web Development", "Django", "MERN"],
-      markdownContent: `
-## The Evolution of a Developer
-
-Starting with Django introduced me to the power of batteries-included frameworks. The admin panel, ORM, and built-in authentication made rapid development possible.
-
-### Why Django First?
-
-Django's "don't repeat yourself" philosophy and comprehensive documentation made it an excellent starting point. The framework handles many common web development challenges out of the box.
-
-### Expanding to MERN
-
-Learning the MERN stack opened new possibilities for building modern, reactive applications. The JavaScript ecosystem's flexibility complements Django's structure beautifully.
-
-> "The best developers aren't married to a single technology—they choose the right tool for each job."
-
-### Key Takeaways
-
-*   **Framework Agnostic**: Understanding core concepts matters more than specific tools.
-*   **Full-Stack Thinking**: Knowing both frontend and backend creates better solutions.
-*   **Continuous Learning**: The tech landscape evolves; adaptability is essential.
-      `,
+      contentFile: "/content/blog/web-development-journey.md",
     },
     {
       id: "machine-learning-web-dev",
@@ -343,39 +254,7 @@ Learning the MERN stack opened new possibilities for building modern, reactive a
       date: "Oct 28, 2024",
       readTime: "6 min read",
       tags: ["Machine Learning", "FastAPI", "Production"],
-      markdownContent: `
-## From Jupyter to Production
-
-Building ML models in notebooks is one thing; deploying them in production web applications is another challenge entirely.
-
-### The Deployment Gap
-
-Many data scientists struggle with the transition from experimentation to deployment. FastAPI bridges this gap beautifully.
-
-\`\`\`python
-from fastapi import FastAPI
-import joblib
-
-app = FastAPI()
-model = joblib.load("model.pkl")
-
-@app.post("/predict")
-async def predict(features: dict):
-    prediction = model.predict([features])
-    return {"prediction": prediction.tolist()}
-\`\`\`
-
-### Best Practices
-
-1.  **Model Versioning**: Track model versions alongside code.
-2.  **API Design**: Create intuitive endpoints for model inference.
-3.  **Error Handling**: Gracefully handle invalid inputs and edge cases.
-4.  **Performance**: Optimize inference time for production workloads.
-
-### Tools and Technologies
-
-FastAPI, Docker, and modern MLOps tools make deployment manageable. The key is planning for production from the start.
-      `,
+      contentFile: "/content/blog/machine-learning-web-dev.md",
     },
     {
       id: "low-level-programming",
@@ -385,27 +264,7 @@ FastAPI, Docker, and modern MLOps tools make deployment manageable. The key is p
       date: "Sep 22, 2024",
       readTime: "4 min read",
       tags: ["C++", "Performance", "Optimization"],
-      markdownContent: `
-## The Value of Low-Level Knowledge
-
-Working with C++ and manual memory management provides insights that make you a better developer in any language.
-
-### Understanding the Machine
-
-High-level languages abstract away complexity, but understanding what happens underneath makes you write more efficient code.
-
-### Performance Matters
-
-When optimizing web applications, knowledge of memory allocation, cache efficiency, and algorithmic complexity becomes crucial.
-
-> "Learning C++ is like learning to drive a manual transmission—it gives you better control and deeper understanding."
-
-### Practical Applications
-
-*   **Algorithm Design**: Better understanding of time and space complexity.
-*   **Debugging**: Identifying memory leaks and performance bottlenecks.
-*   **System Thinking**: Appreciating how high-level abstractions work under the hood.
-      `,
+      contentFile: "/content/blog/low-level-programming.md",
     },
   ],
 };
