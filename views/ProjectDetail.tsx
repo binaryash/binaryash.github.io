@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
 import { Project } from '../types';
-import { MarkdownView } from '../components/MarkdownView';
+import { MarkdownContent } from '../components/MarkdownContent';
 
 export const ProjectDetail: React.FC<{ 
   project: Project; 
@@ -70,7 +70,7 @@ export const ProjectDetail: React.FC<{
 
         {/* Content */}
         <div className="max-w-2xl mx-auto py-8">
-          <MarkdownView content={project.markdownContent} />
+          <MarkdownContent contentFile={project.contentFile} />
         </div>
       </div>
       

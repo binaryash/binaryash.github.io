@@ -1,8 +1,8 @@
 import React from 'react';
-import { Mail } from 'lucide-react';
+import { Mail, Download } from 'lucide-react';
 import { config } from '../config';
 import { SocialButton } from '../components/SocialButton';
-import { MarkdownView } from '../components/MarkdownView';
+import { MarkdownContent } from '../components/MarkdownContent';
 
 export const AboutView: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ export const AboutView: React.FC = () => {
       <h1 className="text-4xl font-serif font-medium text-neutral-900 dark:text-neutral-100 mb-8">About</h1>
       
       <div className="prose prose-lg prose-neutral dark:prose-invert text-neutral-500 dark:text-neutral-400 leading-relaxed mb-12">
-        <MarkdownView content={config.profile.bio} />
+        <MarkdownContent contentFile={config.profile.bioFile} />
       </div>
 
       <div className="mb-12">
@@ -33,6 +33,7 @@ export const AboutView: React.FC = () => {
           <a 
             href={`mailto:${config.profile.email}`}
             className="p-2 rounded-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400 hover:border-accent dark:hover:border-accent hover:text-accent dark:hover:text-accent hover:scale-105 transition-all duration-300"
+            title="Send Email"
           >
             <Mail size={18} strokeWidth={1.5} />
           </a>

@@ -4,7 +4,7 @@ export interface Project {
   shortDescription: string;
   coverImage: string;
   tags: string[];
-  markdownContent: string;
+  contentFile: string; // Path to markdown file in /content/projects/
   links?: {
     demo?: string;
     repo?: string;
@@ -20,7 +20,7 @@ export interface BlogPost {
   date: string;
   readTime: string;
   tags: string[];
-  markdownContent: string;
+  contentFile: string; // Path to markdown file in /content/blog/
 }
 
 export interface SocialLink {
@@ -32,7 +32,7 @@ export interface SocialLink {
 export interface Profile {
   name: string;
   title: string;
-  bio: string; // Markdown supported
+  bioFile: string; // Path to markdown file in /content/profile/
   skills: string[];
   avatar: string;
   email: string;

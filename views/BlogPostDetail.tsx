@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { BlogPost } from '../types';
-import { MarkdownView } from '../components/MarkdownView';
+import { MarkdownContent } from '../components/MarkdownContent';
 
 export const BlogPostDetail: React.FC<{ 
   post: BlogPost; 
@@ -41,7 +41,7 @@ export const BlogPostDetail: React.FC<{
 
         {/* Content */}
         <div className="py-4">
-          <MarkdownView content={post.markdownContent} />
+          <MarkdownContent contentFile={post.contentFile} />
         </div>
       </div>
       
