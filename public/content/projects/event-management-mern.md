@@ -1,18 +1,9 @@
 ## Project Overview
-
-Full-featured event management platform built with the MERN stack. Enables organizers to create events and attendees to discover and register for events.
+A full-stack event management solution designed for community-driven engagement. This project demonstrates the flexibility of the MERN stack in building data-intensive, user-centric applications.
 
 ### Key Capabilities
-
-*   **Event CRUD**: Complete create, read, update, delete operations for events.
-*   **User Authentication**: Secure login and registration system.
-*   **Ticketing System**: Integrated event registration and ticketing.
-*   **Search & Filter**: Advanced search functionality with multiple filter options.
-
-### Implementation Details
-
-The application uses JWT for authentication, MongoDB for flexible data storage, and React for a responsive, interactive user interface. Express.js handles the RESTful API endpoints efficiently.
-
-### User Experience
-
-Designed with both event organizers and attendees in mind, providing intuitive interfaces for creating events and browsing upcoming opportunities.
+* **Dynamic Event Lifecycle**: Complete CRUD operations for events, allowing organizers to manage everything from venue details and ticketing to attendee lists in real-time.
+* **Flexible Data Storage**: Leveraged **MongoDB** for its schema-less nature, allowing for varied event types and dynamic metadata without costly database migrations.
+* **Secure Authentication**: Implemented JWT-based authentication to manage user sessions and protect organizer-only routes.
+* **Advanced Search**: Built a robust search and filtering engine, allowing users to discover events by category, date, location, and popularity.
+* **Responsive Design**: Styled with modern CSS frameworks to ensure a high-quality experience on mobile, tablet, and desktop.

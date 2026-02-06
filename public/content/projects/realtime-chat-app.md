@@ -1,20 +1,11 @@
 ## The Concept
-
-A modern real-time chat application leveraging Django Channels and WebSockets for instant messaging capabilities. Designed for scalability and low latency communication.
-
-### Core Features
-
-1.  **Multiple Chat Rooms**: Support for numerous concurrent chat rooms.
-2.  **Live Messaging**: Instant message delivery using WebSocket connections.
-3.  **Presence Indicators**: Real-time user online/offline status.
-4.  **Message Broadcasting**: Efficient message distribution to all room participants.
+A high-performance real-time chat application designed for low-latency communication. It explores the transition from traditional HTTP polling to persistent stateful connections.
 
 ### Technical Architecture
-
-Built on Django Channels with Redis as the channel layer backend. The async architecture ensures optimal performance even under high load.
-
-> "Real-time communication requires a fundamental shift in how we think about web applications."
-
-### Challenges Overcome
-
-Implementing connection management and ensuring message delivery reliability across disconnections were key challenges solved through careful state management and reconnection strategies.
+* **Django Channels & WebSockets**: Leveraged Django Channels to handle asynchronous WebSocket protocols, allowing for instant bi-directional messaging between clients.
+* **State Management**: Utilized **Redis** as the channel layer to manage group communication and message broadcasting across multiple worker processes.
+* **Real-Time Features**:
+    * **Concurrent Rooms**: Support for multiple isolated chat environments.
+    * **Presence Indicators**: Real-time tracking of user online/offline status.
+    * **Message Persistence**: Reliable storage and retrieval of chat history using a lightweight PostgreSQL schema.
+* **Optimized UI**: The frontend handles real-time state updates efficiently, ensuring the UI remains responsive even during high-frequency message streams.
