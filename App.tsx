@@ -40,20 +40,6 @@ const App: React.FC = () => {
     }
   }, [isDark]);
 
-  // SEO/Title Side Effect
-  useEffect(() => {
-    let title = "Binary Ash | Full-Stack, AI & Embedded Engineer";
-    if (activeProject) {
-      title = `${activeProject.title} | Projects | Binary Ash`;
-    } else if (activePost) {
-      title = `${activePost.title} | Blog | Binary Ash`;
-    } else if (currentView !== "home") {
-      const viewTitle = currentView.charAt(0).toUpperCase() + currentView.slice(1);
-      title = `${viewTitle} | Binary Ash`;
-    }
-    document.title = title;
-  }, [activeProject, activePost, currentView]);
-
   const toggleTheme = () => setIsDark(!isDark);
 
   const activeProject = selectedProjectId
