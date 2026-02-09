@@ -65,6 +65,11 @@
       .dark ::-webkit-scrollbar-thumb:hover {
         background: #525252;
       }
+      /* Remove default backticks from prose code blocks */
+      .prose code::before,
+      .prose code::after {
+        content: "" !important;
+      }
     </style>
   <script type="importmap">
 {

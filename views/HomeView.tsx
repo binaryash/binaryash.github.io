@@ -18,12 +18,9 @@ export const HomeView: React.FC<{ onNavigate: (view: ViewState) => void; onProje
           <h2 className="text-xl md:text-2xl text-neutral-500 dark:text-neutral-400 font-light">
             {config.profile.title}
           </h2>
-          <div className="pt-4 space-y-4">
+          <div className="pt-4">
             <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-xl">
               I architect, build, and deploy end-to-end intelligent systems. Specialized in Full-Stack, AI, and Embedded Engineering—from concept to production.
-            </p>
-            <p className="text-neutral-500 dark:text-neutral-500 font-light">
-              To contact, mail me at <a href={`mailto:${config.profile.email}`} className="text-accent hover:underline">{config.profile.email}</a>
             </p>
           </div>
         </div>

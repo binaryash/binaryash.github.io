@@ -16,9 +16,9 @@ export const MarkdownView: React.FC<MarkdownViewProps> = ({ content }) => {
           h2: ({node, ...props}) => <h2 className="text-2xl font-medium tracking-tight mt-8 mb-4 dark:text-neutral-200" {...props} />,
           h3: ({node, ...props}) => <h3 className="text-xl font-medium tracking-tight mt-6 mb-3 dark:text-neutral-200" {...props} />,
           p: ({node, ...props}) => <p className="text-neutral-600 dark:text-neutral-400 leading-7 mb-4" {...props} />,
-          ul: ({node, ...props}) => <ul className="list-disc list-inside mb-4 space-y-1 text-neutral-600 dark:text-neutral-400" {...props} />,
-          ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-4 space-y-1 text-neutral-600 dark:text-neutral-400" {...props} />,
-          li: ({node, ...props}) => <li className="ml-2" {...props} />,
+          ul: ({node, ...props}) => <ul className="list-disc ml-6 mb-4 space-y-1 text-neutral-600 dark:text-neutral-400" {...props} />,
+          ol: ({node, ...props}) => <ol className="list-decimal ml-6 mb-4 space-y-1 text-neutral-600 dark:text-neutral-400" {...props} />,
+          li: ({node, ...props}) => <li className="pl-1" {...props} />,
           table: ({node, ...props}) => (
             <div className="overflow-x-auto mb-8 my-6">
               <table className="w-full text-left border-collapse text-sm" {...props} />
