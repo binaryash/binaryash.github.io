@@ -1,76 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binary Ash | Full-Stack, AI & Embedded Engineer</title>
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
-    <link rel="manifest" href="/favicon/site.webmanifest">
 
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        darkMode: 'selector',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            },
-            colors: {
-              accent: '#3b82f6', // A hinge of blue
-            }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binary Ash | Full-Stack, AI & Embedded Engineer</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'selector',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            accent: '#3b82f6', // A hinge of blue
           }
         }
       }
-    </script>
-    <script>
-      // Initialize dark mode based on system preference or localStorage
-      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    </script>
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      /* Custom scrollbar for a cleaner look */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #c1c1c1; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #a8a8a8; 
-      }
-      .dark ::-webkit-scrollbar-thumb {
-        background: #404040;
-      }
-      .dark ::-webkit-scrollbar-thumb:hover {
-        background: #525252;
-      }
-      /* Remove default backticks from prose code blocks */
-      .prose code::before,
-      .prose code::after {
-        content: "" !important;
-      }
-    </style>
+    }
+  </script>
+  <script>
+    // Initialize dark mode based on system preference or localStorage
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom scrollbar for a cleaner look */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+
+    .dark ::-webkit-scrollbar-thumb {
+      background: #404040;
+    }
+
+    .dark ::-webkit-scrollbar-thumb:hover {
+      background: #525252;
+    }
+
+    /* Remove default backticks from prose code blocks */
+    .prose code::before,
+    .prose code::after {
+      content: "" !important;
+    }
+
+    /* Completely override prose pre styling to let our component handle it */
+    .prose pre {
+      background-color: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 0 !important;
+      color: inherit !important;
+    }
+
+    /* Ensure prose doesn't add background to code inside pre */
+    .prose pre code {
+      background-color: transparent !important;
+      padding: 0 !important;
+      color: inherit !important;
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -83,8 +109,11 @@
 }
 </script>
 </head>
-  <body class="bg-neutral-50/50 text-neutral-900 selection:bg-accent selection:text-white dark:bg-[#0a0a0a] dark:text-neutral-50 transition-colors duration-500 antialiased">
-    <div id="root"></div>
+
+<body
+  class="bg-neutral-50/50 text-neutral-900 selection:bg-accent selection:text-white dark:bg-[#0a0a0a] dark:text-neutral-50 transition-colors duration-500 antialiased">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
