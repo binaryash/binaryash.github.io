@@ -52,6 +52,19 @@ export const config: SiteConfig = {
   },
   projects: [
     {
+      id: "kp-tui",
+      title: "KP - A KeePassXC TUI",
+      shortDescription: "A lightning-fast, TUI wrapper for KeePassXC with fuzzy-find and quick copy.",
+      coverImage: "https://picsum.photos/800/600?random=15",
+      date: "2026",
+      featured: true,
+      tags: ["Bash", "TUI", "KeePassXC", "fzf", "Security"],
+      contentFile: "/content/projects/kp-tui.md",
+      links: {
+        repo: "https://github.com/binaryash/kp",
+      },
+    },
+    {
       id: "redbud-ems",
       title: "Redbud - Employee Management System",
       shortDescription: "Workforce platform with Gemini agents for contract assignment and RAG-based matching.",
@@ -218,6 +231,15 @@ export const config: SiteConfig = {
     },
   ],
   blog: [
+    {
+      id: "kp-tui-launch",
+      title: "Building KP: A Lightning-Fast TUI for KeePassXC",
+      excerpt: "Why I built a terminal-based wrapper for KeePassXC and how it speeds up my workflow.",
+      date: "Feb 09, 2026",
+      readTime: "4 min read",
+      tags: ["Bash", "TUI", "Security", "fzf"],
+      contentFile: "/content/blog/kp-tui-launch.md",
+    },
     {
       id: "ai-agents-orchestration",
       title: "Orchestrating Intelligence: The Rise of AI Agents",
