@@ -30,12 +30,12 @@ export const MarkdownView: React.FC<MarkdownViewProps> = ({ content }) => {
           code: ({node, className, children, ...props}) => { 
             const isInline = !String(children).includes('\n');
             return isInline ? (
-              <code className="bg-neutral-200 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200 rounded px-1.5 py-0.5 text-sm font-mono" {...props}>
+              <code className="bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-200 rounded px-1.5 py-0.5 text-sm font-mono font-medium" {...props}>
                 {children}
               </code>
             ) : (
-              <pre className="bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50 rounded-lg p-4 overflow-x-auto mb-4 text-sm font-mono border border-neutral-200 dark:border-neutral-800">
-                <code className={className} {...props}>
+              <pre className="bg-neutral-50 dark:bg-neutral-900 rounded-lg p-4 overflow-x-auto mb-4 text-sm font-mono border border-neutral-200 dark:border-neutral-800">
+                <code className="text-neutral-900 dark:text-neutral-50" {...props}>
                   {children}
                 </code>
               </pre>
