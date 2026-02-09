@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface MarkdownViewProps {
   content: string;
@@ -9,6 +10,7 @@ export const MarkdownView: React.FC<MarkdownViewProps> = ({ content }) => {
   return (
     <div className="prose prose-neutral max-w-none dark:prose-invert prose-headings:font-normal prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-strong:font-medium prose-blockquote:border-l-accent prose-blockquote:bg-neutral-100 dark:prose-blockquote:bg-neutral-900 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:rounded-r-lg transition-colors">
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
         components={{
           h1: ({node, ...props}) => <h1 className="text-3xl font-medium tracking-tight mt-8 mb-4 dark:text-neutral-100" {...props} />,
           h2: ({node, ...props}) => <h2 className="text-2xl font-medium tracking-tight mt-8 mb-4 dark:text-neutral-200" {...props} />,
@@ -17,6 +19,14 @@ export const MarkdownView: React.FC<MarkdownViewProps> = ({ content }) => {
           ul: ({node, ...props}) => <ul className="list-disc list-inside mb-4 space-y-1 text-neutral-600 dark:text-neutral-400" {...props} />,
           ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-4 space-y-1 text-neutral-600 dark:text-neutral-400" {...props} />,
           li: ({node, ...props}) => <li className="ml-2" {...props} />,
+          table: ({node, ...props}) => (
+            <div className="overflow-x-auto mb-8 my-6">
+              <table className="w-full text-left border-collapse text-sm" {...props} />
+            </div>
+          ),
+          thead: ({node, ...props}) => <thead className="border-b-2 border-neutral-200 dark:border-neutral-800" {...props} />,
+          th: ({node, ...props}) => <th className="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100 bg-neutral-50/50 dark:bg-neutral-900/50" {...props} />,
+          td: ({node, ...props}) => <td className="py-3 px-4 text-neutral-600 dark:text-neutral-400 border-b border-neutral-100 dark:border-neutral-900" {...props} />,
           code: ({node, className, children, ...props}) => { 
             const isInline = !String(children).includes('\n');
             return isInline ? (
