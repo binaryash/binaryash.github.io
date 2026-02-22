@@ -1,0 +1,319 @@
+---
+import { getAllProjects, PROJECTS_PER_PAGE } from "../../../lib/projectIndex";
+import SiteNavbar from "../../../components/SiteNavbar.astro";
+
+export async function getStaticPaths() {
+  const projects = await getAllProjects();
+  const totalPages = Math.max(1, Math.ceil(projects.length / PROJECTS_PER_PAGE));
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+    params: { page: String(i + 2) },
+  }));
+}
+
+const allProjects = await getAllProjects();
+const totalPages = Math.max(1, Math.ceil(allProjects.length / PROJECTS_PER_PAGE));
+const requested = Number(Astro.params.page || "2");
+const currentPage = Number.isFinite(requested) && requested > 1 ? requested : 2;
+const start = (currentPage - 1) * PROJECTS_PER_PAGE;
+const items = allProjects.slice(start, start + PROJECTS_PER_PAGE);
+---
+
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Projects Page {currentPage}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem("theme");
+          const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const initial = saved || (systemDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", initial);
+        } catch {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <style is:global>
+      @font-face {
+        font-family: "Virgil";
+        src: url("/fonts/Virgil.woff2") format("woff2"), local("Virgil");
+        font-display: swap;
+      }
+
+      :root {
+        --bg: #efefef;
+        --ink: #252525;
+        --muted: #6d6d6d;
+      }
+
+      html[data-theme="dark"] {
+        --bg: #1f2125;
+        --ink: #d7d9dd;
+        --muted: #9ea3aa;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 1.25rem;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Virgil", "Comic Sans MS", cursive;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .frame {
+        min-height: 94vh;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 0 3rem;
+      }
+
+      .section-title {
+        max-width: 560px;
+        width: 100%;
+        margin: 0.6rem auto 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .section-title h1 {
+        margin: 0;
+        font-size: 2.25rem;
+        font-weight: 400;
+        line-height: 1.05;
+      }
+
+      .section-divider {
+        flex: 1;
+        height: 38px;
+      }
+
+      .grid {
+        max-width: 560px;
+        margin: 1rem auto 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 1.15rem;
+      }
+
+      .item {
+        display: block;
+      }
+
+      .card {
+        padding: 0.7rem;
+      }
+
+      .image-box {
+        border-radius: 24px;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+      }
+
+      .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(100%) contrast(1.03);
+      }
+
+      .meta {
+        margin-top: 0.75rem;
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.8rem;
+        align-items: baseline;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 1.15rem;
+        line-height: 1.3;
+      }
+
+      .year {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .summary {
+        margin: 0.45rem 0 0.6rem;
+        line-height: 1.4;
+        color: color-mix(in oklab, var(--ink) 88%, var(--bg));
+      }
+
+      .tags {
+        display: flex;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        border-radius: 7px;
+        padding: 0.1rem 0.45rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.01em;
+        color: var(--muted);
+      }
+
+      .pager-wrap {
+        max-width: 560px;
+        width: 100%;
+        margin: auto auto 0;
+      }
+
+      .pager-line {
+        width: 100%;
+        height: 28px;
+        margin: 1rem 0 0.25rem;
+      }
+
+      .pager {
+        text-align: center;
+        font-size: 1.1rem;
+        padding-bottom: 0.4rem;
+      }
+
+      @media (max-width: 900px) {
+        .section-title h1 {
+          font-size: 1.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="frame">
+      <SiteNavbar brand="binaryash" />
+
+      <section class="section-title">
+        <h1>All Projects</h1>
+        <svg class="section-divider" viewBox="0 0 1000 38" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </section>
+
+      <section class="grid">
+        {
+          items.map((item) => (
+            <a class="item" href={`/projects/${item.slug}`}>
+              <article class="card">
+                <div class="image-box">
+                  <img
+                    src={`https://picsum.photos/900/560?random=${item.imageSeed}`}
+                    alt={item.title}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="meta">
+                  <div class="row">
+                    <p class="title">{item.title}</p>
+                    <span class="year">{item.year}</span>
+                  </div>
+                  <p class="summary">{item.summary}</p>
+                  <div class="tags">
+                    {item.tags.map((tag) => <span class="tag">{tag.toLowerCase()}</span>)}
+                  </div>
+                </div>
+              </article>
+            </a>
+          ))
+        }
+      </section>
+
+      <footer class="pager-wrap">
+        <svg class="pager-line" viewBox="0 0 1000 28" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="pager">
+          {currentPage > 1 && <a href={currentPage === 2 ? "/projects" : `/projects/page/${currentPage - 1}`}>prev</a>}
+          {currentPage > 1 && " "}
+          <span>page {currentPage}/{totalPages}</span>
+          {currentPage < totalPages && " "}
+          {currentPage < totalPages && <a href={`/projects/page/${currentPage + 1}`}>next</a>}
+        </div>
+      </footer>
+    </main>
+
+    <script is:inline src="/vendor/rough.js"></script>
+    <script is:inline>
+      const divider = document.querySelector(".section-divider");
+      const pagerLine = document.querySelector(".pager-line");
+
+      const drawLine = (el, seed) => {
+        if (!el || !window.rough) return;
+        el.innerHTML = "";
+        const rc = window.rough.svg(el);
+        const stroke = getComputedStyle(document.documentElement)
+          .getPropertyValue("--ink")
+          .trim();
+        el.appendChild(
+          rc.line(8, 20, 990, 18, {
+            seed,
+            stroke,
+            strokeWidth: 0.9,
+            roughness: 1.5,
+            bowing: 2.1,
+          })
+        );
+      };
+
+      if (window.rough) {
+        drawLine(divider, 201);
+        drawLine(pagerLine, 301);
+
+        const ro = new ResizeObserver(() => {
+          drawLine(divider, 201);
+          drawLine(pagerLine, 301);
+        });
+        if (divider) ro.observe(divider);
+        if (pagerLine) ro.observe(pagerLine);
+
+        const root = document.documentElement;
+        const toggles = () => document.querySelectorAll("[data-theme-toggle]");
+        const setTheme = (theme) => {
+          root.setAttribute("data-theme", theme);
+          try {
+            localStorage.setItem("theme", theme);
+          } catch {}
+          toggles().forEach((btn) => {
+            btn.textContent = `theme: ${theme === "dark" ? "Light" : "Dark"}`;
+          });
+          drawLine(divider, 201);
+          drawLine(pagerLine, 301);
+        };
+
+        setTheme(root.getAttribute("data-theme") || "light");
+
+        document.addEventListener("click", (event) => {
+          const target = event.target;
+          if (!(target instanceof Element)) return;
+          const button = target.closest("[data-theme-toggle]");
+          if (!button) return;
+          const next = (root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark";
+          setTheme(next);
+        });
+
+        const snackToggle = document.getElementById("snack-toggle");
+        const navWrap = document.getElementById("nav-wrap");
+        snackToggle?.addEventListener("click", () => {
+          const open = navWrap?.dataset.open === "true";
+          const next = !open;
+          if (navWrap) navWrap.dataset.open = String(next);
+          snackToggle.setAttribute("aria-expanded", String(next));
+        });
+      }
+    </script>
+  </body>
+</html>

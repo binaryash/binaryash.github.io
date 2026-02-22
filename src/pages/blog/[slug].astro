@@ -1,0 +1,537 @@
+---
+import { readFile, readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { renderMarkdown } from "../../lib/renderMarkdown";
+import SiteNavbar from "../../components/SiteNavbar.astro";
+
+const toTitle = (slug: string) =>
+  slug
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+
+const cleanLine = (line: string) =>
+  line
+    .replace(/^#+\s*/, "")
+    .replace(/\*\*/g, "")
+    .replace(/`/g, "")
+    .replace(/^\*\s*/, "")
+    .trim();
+
+export async function getStaticPaths() {
+  const root = join(process.cwd(), "public", "content", "blog");
+  const files = (await readdir(root)).filter((file) => file.endsWith(".md"));
+  return files.map((file) => ({
+    params: { slug: file.replace(".md", "") },
+  }));
+}
+
+const slug = Astro.params.slug ?? "";
+const filePath = join(process.cwd(), "public", "content", "blog", `${slug}.md`);
+const raw = await readFile(filePath, "utf-8");
+const lines = raw.split("\n");
+
+const titleLine = lines.find((line) => line.trim().startsWith("# "));
+const title = titleLine ? cleanLine(titleLine) : toTitle(slug);
+
+const tags = Array.from(
+  new Set(raw.match(/#[a-zA-Z0-9_-]+/g) ?? [])
+).slice(0, 4);
+const fallbackTags = slug
+  .split("-")
+  .filter((word) => word.length > 2)
+  .slice(0, 3)
+  .map((word) => `#${word}`);
+
+const markdownBody = raw.replace(/^#\s+.*\n?/, "");
+const htmlContent = await renderMarkdown(markdownBody);
+const imageSeed = slug
+  .split("")
+  .reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+---
+
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="binaryash blog detail page with reading progress and minimal markdown layout."
+    />
+    <title>{title} | Blog</title>
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem("theme");
+          const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const initial = saved || (systemDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", initial);
+        } catch {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <style is:global>
+      :root {
+        --bg: #efefef;
+        --ink: #252525;
+      }
+
+      @font-face {
+        font-family: "Virgil";
+        src: url("/fonts/Virgil.woff2") format("woff2"), local("Virgil");
+        font-display: swap;
+      }
+
+      html[data-theme="dark"] {
+        --bg: #1f2125;
+        --ink: #d7d9dd;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 1.25rem;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Virgil", "Comic Sans MS", cursive;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .nav-wrap {
+        max-width: 560px;
+        margin: 0 auto 3rem;
+        animation: fade-up 420ms ease both;
+      }
+
+      .nav {
+        border: 0;
+        padding: 0.8rem 1rem 0.8rem 0.45rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .brand {
+        margin-left: -0.6rem;
+        font-weight: 400;
+      }
+
+      .menu {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+      }
+
+      .menu a {
+        color: inherit;
+        text-decoration: none;
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+
+      .menu a:hover {
+        opacity: 0.75;
+        transform: translateY(-1px);
+      }
+
+      .theme-btn {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        padding: 0;
+        cursor: pointer;
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+
+      .theme-btn:hover {
+        opacity: 0.75;
+        transform: translateY(-1px);
+      }
+
+      .snack-toggle {
+        display: none;
+        border: 0;
+        background: transparent;
+        padding: 0.1rem 0;
+        cursor: pointer;
+      }
+
+      .snack-icon {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+
+      .snack-icon span {
+        width: 90px;
+        height: 4px;
+        border-radius: 999px;
+        background: var(--ink);
+      }
+
+      .mobile-panel {
+        margin-top: 0.8rem;
+        border: 0;
+        padding: 0.8rem 1rem;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        transform: translateY(-4px);
+        transition:
+          max-height 240ms ease,
+          opacity 180ms ease,
+          transform 220ms ease;
+      }
+
+      .mobile-panel a,
+      .mobile-panel button {
+        display: block;
+        margin: 0 0 0.6rem;
+        color: inherit;
+        text-decoration: none;
+        font: inherit;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      .mobile-panel button {
+        margin: 0;
+      }
+
+      .nav-wrap[data-open="true"] .mobile-panel {
+        max-height: 220px;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .wrap {
+        max-width: 560px;
+        margin: 0 auto;
+        font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: 0.98rem;
+      }
+
+      .reading-indicator {
+        position: fixed;
+        left: 1.2rem;
+        top: 7.2rem;
+        width: 160px;
+        font-family: "Virgil", "Comic Sans MS", cursive;
+        font-size: 0.9rem;
+        line-height: 1.45;
+        opacity: 0.86;
+      }
+
+      .reading-indicator p {
+        margin: 0 0 0.35rem;
+      }
+
+      .toc-list {
+        margin-top: 0.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .toc-list a {
+        opacity: 0.78;
+      }
+
+      h1 {
+        margin: 0 0 0.4rem;
+        font-size: 1.4rem;
+        line-height: 1.2;
+        font-weight: 400;
+      }
+
+      .tags {
+        margin: 0 0 1.6rem;
+        font-size: 1.05rem;
+      }
+
+      .image-box {
+        border: 0;
+        border-radius: 26px;
+        overflow: hidden;
+        max-width: 560px;
+        margin: 0 0 2rem;
+      }
+
+      .image-box img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .content p {
+        margin: 0 0 1.2rem;
+        line-height: 1.75;
+      }
+
+      .content > * + * {
+        margin-top: 0.45rem;
+      }
+
+      .content h2,
+      .content h3 {
+        margin: 1.8rem 0 0.9rem;
+        font-size: 1.18rem;
+        font-weight: 700;
+        line-height: 1.45;
+        letter-spacing: 0.01em;
+      }
+
+      .content h2 {
+        margin-top: 2.2rem;
+        padding-top: 0.35rem;
+        border-top: 1px solid rgba(37, 37, 37, 0.22);
+      }
+
+      html[data-theme="dark"] .content h2 {
+        border-top-color: rgba(215, 217, 221, 0.26);
+      }
+
+      .content h3 {
+        font-size: 1.08rem;
+        font-weight: 600;
+      }
+
+      .content ul,
+      .content ol {
+        margin: 0 0 1.3rem 1.4rem;
+        padding: 0;
+        line-height: 1.7;
+      }
+
+      .content li {
+        margin: 0 0 0.7rem;
+      }
+
+      .content pre {
+        margin: 0.2rem 0 1.4rem;
+        padding: 2.5rem 1.05rem 1rem;
+        border-radius: 12px;
+        overflow-x: auto;
+        background: rgba(0, 0, 0, 0.08);
+        line-height: 1.55;
+        position: relative;
+      }
+
+      html[data-theme="dark"] .content pre {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .content code {
+        font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: 0.92em;
+      }
+
+      .copy-btn {
+        position: absolute;
+        top: 0.55rem;
+        right: 0.55rem;
+        width: 2rem;
+        height: 2rem;
+        border: 0;
+        border-radius: 0.45rem;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.16);
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .copy-btn svg {
+        width: 1.05rem;
+        height: 1.05rem;
+      }
+
+      .copy-btn.copied {
+        background: rgba(30, 160, 90, 0.28);
+      }
+
+      html[data-theme="dark"] .copy-btn {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          margin-bottom: 2rem;
+        }
+
+        .menu {
+          display: none;
+        }
+
+        .theme-btn.desktop {
+          display: none;
+        }
+
+        .snack-toggle {
+          display: block;
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .reading-indicator {
+          display: none;
+        }
+      }
+
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="reading-indicator" aria-label="Reading progress">
+      <p id="read-progress">0% read</p>
+      <p id="topics-left">0 topics left</p>
+      <nav id="toc-list" class="toc-list" aria-label="Topics"></nav>
+    </aside>
+
+    <SiteNavbar brand="binaryash" />
+
+    <main class="wrap">
+      <h1>{title}</h1>
+      <p class="tags">{(tags.length ? tags : fallbackTags).join(" ")}</p>
+
+      <div class="image-box">
+        <img
+          src={`https://picsum.photos/960/420?random=${imageSeed}`}
+          alt={title}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <section class="content">
+        <Fragment set:html={htmlContent} />
+      </section>
+    </main>
+
+    <script is:inline>
+      const root = document.documentElement;
+      const toggles = () => document.querySelectorAll("[data-theme-toggle]");
+      const snackToggle = document.getElementById("snack-toggle");
+      const navWrap = document.getElementById("nav-wrap");
+      const setTheme = (theme) => {
+        root.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem("theme", theme);
+        } catch {}
+        toggles().forEach((btn) => {
+          btn.textContent = `theme: ${theme === "dark" ? "Light" : "Dark"}`;
+        });
+      };
+      setTheme(root.getAttribute("data-theme") || "light");
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const button = target.closest("[data-theme-toggle]");
+        if (!button) return;
+        setTheme((root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark");
+      });
+
+      const addCopyButtons = () => {
+        const copyIcon =
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="10" height="10" rx="2"></rect><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg>';
+        document.querySelectorAll(".content pre").forEach((pre) => {
+          if (pre.querySelector(".copy-btn")) return;
+          const btn = document.createElement("button");
+          btn.className = "copy-btn";
+          btn.type = "button";
+          btn.setAttribute("aria-label", "Copy code");
+          btn.dataset.copyIcon = copyIcon;
+          btn.innerHTML = copyIcon;
+          pre.appendChild(btn);
+        });
+      };
+      addCopyButtons();
+
+      document.addEventListener("click", async (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const btn = target.closest(".copy-btn");
+        if (!btn) return;
+        const pre = btn.closest("pre");
+        const code = pre?.querySelector("code");
+        if (!code) return;
+        try {
+          await navigator.clipboard.writeText(code.textContent || "");
+          btn.classList.add("copied");
+          btn.innerHTML =
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.2 4.2L19 7.8"></path></svg>';
+          setTimeout(() => {
+            btn.classList.remove("copied");
+            btn.innerHTML = btn.dataset.copyIcon || "";
+          }, 950);
+        } catch {}
+      });
+
+      const initReadingIndicator = () => {
+        const content = document.querySelector(".content");
+        const progressEl = document.getElementById("read-progress");
+        const leftEl = document.getElementById("topics-left");
+        const toc = document.getElementById("toc-list");
+        if (!content || !progressEl || !leftEl || !toc) return;
+
+        const headings = Array.from(content.querySelectorAll("h2, h3"));
+        headings.forEach((heading, index) => {
+          if (!heading.id) heading.id = `topic-${index + 1}`;
+          const link = document.createElement("a");
+          link.href = `#${heading.id}`;
+          link.textContent = heading.textContent || `Topic ${index + 1}`;
+          toc.appendChild(link);
+        });
+
+        const updateReading = () => {
+          const contentTop = content.offsetTop;
+          const contentHeight = content.scrollHeight;
+          const viewportMarker = window.scrollY + window.innerHeight * 0.38;
+          const ratio = Math.max(
+            0,
+            Math.min(1, (viewportMarker - contentTop) / Math.max(contentHeight, 1))
+          );
+          progressEl.textContent = `${Math.round(ratio * 100)}% read`;
+          const remaining = headings.filter(
+            (heading) => heading.getBoundingClientRect().top > window.innerHeight * 0.38
+          ).length;
+          leftEl.textContent = `${remaining} topics left`;
+        };
+
+        updateReading();
+        window.addEventListener("scroll", updateReading, { passive: true });
+        window.addEventListener("resize", updateReading);
+      };
+      initReadingIndicator();
+
+      snackToggle?.addEventListener("click", () => {
+        const open = navWrap?.dataset.open === "true";
+        const next = !open;
+        if (navWrap) navWrap.dataset.open = String(next);
+        snackToggle.setAttribute("aria-expanded", String(next));
+      });
+    </script>
+  </body>
+</html>
