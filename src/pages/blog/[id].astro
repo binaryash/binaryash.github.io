@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import MarkdownContent from '@/components/MarkdownContent.astro';
+import Icon from '@/components/Icon.astro';
+import { config } from '@/data/config';
+
+export async function getStaticPaths() {
+  return config.blog.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+<BaseLayout currentView="blog" title={`${post.title} | Binary Ash`}>
+  <div class="min-h-screen pt-24 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-2xl mx-auto">
+    <a
+      href="/blog/"
+      class="group flex items-center gap-2 text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors mb-8"
+    >
+      <Icon name="ArrowLeft" size={16} className="group-hover:-translate-x-1 transition-transform" />
+      Back to Notes
+    </a>
+
+    <div class="space-y-8">
+      <div class="space-y-4 border-b border-neutral-200 dark:border-neutral-800 pb-8">
+        <div class="flex flex-wrap gap-4 text-sm text-neutral-400 dark:text-neutral-500 font-mono mb-2">
+          <span class="flex items-center gap-1"><Icon name="Calendar" size={14} /> {post.date}</span>
+          <span class="flex items-center gap-1"><Icon name="Clock" size={14} /> {post.readTime}</span>
+        </div>
+        <h1 class="text-4xl font-serif font-medium text-neutral-900 dark:text-neutral-100 leading-tight">{post.title}</h1>
+
+        <div class="flex flex-wrap gap-2 pt-2">
+          {post.tags.map((tag) => (
+            <span class="text-sm text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 px-2 py-1 rounded">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="py-4">
+        <MarkdownContent contentFile={post.contentFile} />
+      </div>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex justify-center">
+      <a href="/blog/" class="text-neutral-400 hover:text-accent transition-colors font-medium text-sm flex flex-col items-center gap-2">
+        <div class="p-3 rounded-full bg-neutral-100 dark:bg-neutral-900">
+          <Icon name="ArrowLeft" size={20} />
+        </div>
+        Back to Notes
+      </a>
+    </div>
+  </div>
+</BaseLayout>

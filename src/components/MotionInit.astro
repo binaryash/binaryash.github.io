@@ -1,0 +1,80 @@
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const run = async () => {
+    if (prefersReduced) return;
+
+    const { hover, press } = await import('motion-dom');
+    const interactiveTargets = document.querySelectorAll('a, button, [data-motion-card], [data-motion-list], [data-motion-interactive]');
+
+    interactiveTargets.forEach((el) => {
+      hover(el, () => {
+        el.animate(
+          [
+            { transform: 'scale(1)' },
+            { transform: 'scale(1.006)' },
+          ],
+          { duration: 95, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
+        );
+
+        return () => {
+          el.animate(
+            [
+              { transform: 'scale(1.006)' },
+              { transform: 'scale(1)' },
+            ],
+            { duration: 110, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' }
+          );
+        };
+      });
+
+      press(el, () => {
+        el.animate(
+            [
+              { transform: 'scale(1)' },
+              { transform: 'scale(0.994)' },
+            ],
+            { duration: 70, easing: 'ease-out', fill: 'forwards' }
+          );
+          return () => {
+            el.animate(
+              [
+                { transform: 'scale(0.994)' },
+                { transform: 'scale(1)' },
+              ],
+              { duration: 90, easing: 'ease-out', fill: 'forwards' }
+            );
+          };
+        });
+    });
+
+    const revealTargets = document.querySelectorAll('[data-motion-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const element = entry.target;
+          if (element instanceof HTMLElement && element.dataset.motionDone === '1') return;
+          if (element instanceof HTMLElement) element.dataset.motionDone = '1';
+          element.animate(
+            [
+              { opacity: 0.9 },
+              { opacity: 1 },
+            ],
+            { duration: 220, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'both' }
+          );
+          observer.unobserve(element);
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.08 }
+    );
+
+    revealTargets.forEach((el) => observer.observe(el));
+  };
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(run, { timeout: 800 });
+  } else {
+    window.setTimeout(run, 80);
+  }
+</script>

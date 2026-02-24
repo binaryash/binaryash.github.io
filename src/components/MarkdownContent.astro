@@ -1,0 +1,24 @@
+---
+import { renderMarkdown } from '@/lib/markdown';
+
+interface Props {
+  contentFile: string;
+  className?: string;
+}
+
+const { contentFile, className = '' } = Astro.props;
+
+let html = '';
+let error = '';
+
+try {
+  html = await renderMarkdown(contentFile);
+} catch (err) {
+  error = err instanceof Error ? err.message : 'Failed to load markdown content';
+}
+---
+{error ? (
+  <div class="text-red-500 text-sm italic">Error: {error}</div>
+) : (
+  <div class={`prose prose-neutral max-w-none dark:prose-invert prose-headings:font-normal prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-strong:font-medium prose-blockquote:border-l-accent prose-blockquote:bg-neutral-100 dark:prose-blockquote:bg-neutral-900 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:rounded-r-lg transition-colors markdown-content ${className}`} set:html={html}></div>
+)}

@@ -83,5 +83,11 @@ This project is configured for **GitHub Pages** using **GitHub Actions**.
 2.  The workflow in `.github/workflows/deploy.yml` will automatically build the project and deploy the `docs/` folder.
 3.  Ensure your GitHub repository settings are set to **Source: GitHub Actions** under the **Pages** menu.
 
+### GitHub Pages Base Path Behavior
+
+- If the repository name is `username.github.io`, Astro builds with `base: /`.
+- If the repository name is anything else (project page), Astro builds with `base: /<repo-name>/`.
+- `site` defaults to `https://binaryash.github.io` and can be overridden with `SITE_URL` in CI.
+
 ---
 Built by [Binary Ash](https://github.com/binaryash).
