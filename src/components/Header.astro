@@ -1,0 +1,38 @@
+---
+import { config } from '@/data/config';
+import Icon from './Icon.astro';
+
+interface Props {
+  currentView: 'home' | 'projects' | 'blog' | 'about' | '';
+}
+
+const { currentView } = Astro.props;
+---
+<header class="fixed top-0 left-0 right-0 z-50 bg-neutral-50/80 dark:bg-neutral-950/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 transition-colors duration-300">
+  <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="font-medium text-lg tracking-tight cursor-pointer hover:text-accent dark:hover:text-accent transition-colors select-none flex items-center gap-2 shrink-0">
+      <div class="w-2 h-2 rounded-full bg-accent"></div>
+      <span class="hidden sm:block">{config.profile.name}</span>
+    </a>
+
+    <nav class="flex items-center gap-4 sm:gap-8 text-sm font-medium">
+      <div class="flex items-center gap-3 sm:gap-6 text-neutral-500 dark:text-neutral-400">
+        <a href="/" class={`transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${currentView === 'home' ? 'text-neutral-900 dark:text-neutral-100' : ''}`}>Home</a>
+        <a href="/projects/" class={`transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${currentView === 'projects' ? 'text-neutral-900 dark:text-neutral-100' : ''}`}>Work</a>
+        <a href="/blog/" class={`transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${currentView === 'blog' ? 'text-neutral-900 dark:text-neutral-100' : ''}`}>Notes</a>
+        <a href="/about/" class={`transition-colors hover:text-neutral-900 dark:hover:text-neutral-100 ${currentView === 'about' ? 'text-neutral-900 dark:text-neutral-100' : ''}`}>About</a>
+      </div>
+
+      <div class="flex items-center gap-3 pl-2 border-l border-neutral-200 dark:border-neutral-800">
+        <button
+          data-theme-toggle
+          class="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-500 dark:text-neutral-400"
+          aria-label="Toggle Theme"
+        >
+          <span data-theme-icon="sun" class="hidden"><Icon name="Sun" size={18} /></span>
+          <span data-theme-icon="moon"><Icon name="Moon" size={18} /></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>

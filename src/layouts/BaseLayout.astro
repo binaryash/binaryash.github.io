@@ -1,0 +1,187 @@
+---
+import Header from '@/components/Header.astro';
+import MotionInit from '@/components/MotionInit.astro';
+import '@/styles/global.css';
+import '@/styles/tailwind.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentView?: 'home' | 'projects' | 'blog' | 'about' | '';
+}
+
+const {
+  title = 'Binary Ash | Full-Stack, AI & Embedded Engineer',
+  description = 'Professional portfolio for a Full-Stack, AI & Embedded Engineer featuring automated RAG/GenAI project showcases.',
+  currentView = '',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script is:inline>
+      if (localStorage.getItem('theme') === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+
+  <body class="bg-neutral-50/50 text-neutral-900 selection:bg-accent selection:text-white dark:bg-[#0a0a0a] dark:text-neutral-50 transition-colors duration-500 antialiased">
+    <div class="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 transition-colors duration-300">
+      <Header currentView={currentView} />
+
+      <main class="max-w-4xl mx-auto px-6 pt-16">
+        <slot />
+      </main>
+    </div>
+
+    <script is:inline>
+      let isThemeTransitioning = false;
+
+      const applyThemeIcons = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        document.querySelectorAll('[data-theme-icon="sun"]').forEach((el) => {
+          el.classList.toggle('hidden', !isDark);
+        });
+        document.querySelectorAll('[data-theme-icon="moon"]').forEach((el) => {
+          el.classList.toggle('hidden', isDark);
+        });
+      };
+
+      const bindThemeToggle = () => {
+        document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            if (isThemeTransitioning) return;
+            const html = document.documentElement;
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const commitTheme = () => {
+              const isDark = html.classList.toggle('dark');
+              localStorage.setItem('theme', isDark ? 'dark' : 'light');
+              applyThemeIcons();
+            };
+
+            btn.classList.remove('theme-spin');
+            void btn.offsetWidth;
+            btn.classList.add('theme-spin');
+
+            const canViewTransition =
+              !prefersReduced &&
+              'startViewTransition' in document &&
+              typeof document.startViewTransition === 'function';
+
+            if (canViewTransition) {
+              isThemeTransitioning = true;
+              btn.setAttribute('aria-disabled', 'true');
+              const rect = btn.getBoundingClientRect();
+              const x = rect.left + rect.width / 2;
+              const y = rect.top + rect.height / 2;
+              const endRadius = Math.hypot(
+                Math.max(x, window.innerWidth - x),
+                Math.max(y, window.innerHeight - y)
+              );
+
+              const transition = document.startViewTransition(() => {
+                commitTheme();
+              });
+
+              transition.ready.then(() => {
+                document.documentElement.animate(
+                  {
+                    clipPath: [
+                      `circle(0px at ${x}px ${y}px)`,
+                      `circle(${endRadius * 0.72}px at ${x}px ${y}px)`,
+                      `circle(${endRadius}px at ${x}px ${y}px)`,
+                    ],
+                  },
+                  {
+                    duration: 560,
+                    easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    pseudoElement: '::view-transition-new(root)',
+                  }
+                );
+                document.documentElement.animate(
+                  {
+                    opacity: [1, 0.92, 0.86],
+                  },
+                  {
+                    duration: 420,
+                    easing: 'ease-out',
+                    pseudoElement: '::view-transition-old(root)',
+                  }
+                );
+              }).catch(() => {
+                // no-op
+              }).finally(() => {
+                transition.finished.finally(() => {
+                  isThemeTransitioning = false;
+                  btn.removeAttribute('aria-disabled');
+                });
+              });
+            } else {
+              isThemeTransitioning = true;
+              html.classList.add('theme-animating');
+              commitTheme();
+              window.setTimeout(() => {
+                html.classList.remove('theme-animating');
+                isThemeTransitioning = false;
+              }, 420);
+            }
+
+            window.setTimeout(() => {
+              btn.classList.remove('theme-spin');
+            }, 420);
+          });
+        });
+      };
+
+      const bindMarkdownCopy = () => {
+        document.querySelectorAll('.markdown-code-copy').forEach((button) => {
+          button.addEventListener('click', async () => {
+            const parent = button.closest('.markdown-code-wrapper');
+            const code = parent?.querySelector('code');
+            if (!code) return;
+
+            try {
+              await navigator.clipboard.writeText(code.innerText);
+              const copy = button.querySelector('[data-copy-icon]');
+              const check = button.querySelector('[data-check-icon]');
+              copy?.classList.add('hidden');
+              check?.classList.remove('hidden');
+              setTimeout(() => {
+                check?.classList.add('hidden');
+                copy?.classList.remove('hidden');
+              }, 2000);
+            } catch {
+              // no-op
+            }
+          });
+        });
+      };
+
+      applyThemeIcons();
+      bindThemeToggle();
+      bindMarkdownCopy();
+    </script>
+    <MotionInit />
+  </body>
+</html>

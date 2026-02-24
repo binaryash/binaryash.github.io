@@ -1,0 +1,12 @@
+---
+import { config } from '@/data/config';
+---
+<footer class="py-12 border-t border-neutral-200 dark:border-neutral-800 mt-20">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-500 dark:text-neutral-500">
+    <p>© {new Date().getFullYear()} {config.profile.name}. All rights reserved.</p>
+    <p class="flex items-center gap-1">
+      Built with Astro
+      <span class="w-2 h-2 rounded-full bg-accent inline-block ml-1"></span>
+    </p>
+  </div>
+</footer>

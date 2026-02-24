@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en" data-theme="light"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Projects</title><script>
+      (() => {
+        try {
+          const saved = localStorage.getItem("theme");
+          const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const initial = saved || (systemDark ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", initial);
+        } catch {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script><style>.site-navbar.nav-wrap{max-width:560px!important;width:min(560px,calc(100% - 2.5rem))!important;margin:0 auto 3rem!important;animation:fade-up .42s ease both}.site-navbar .nav{border:0;padding:.8rem 1rem .8rem .45rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}.site-navbar .brand{margin-left:-.6rem;font-weight:400;color:inherit;text-decoration:none}.site-navbar .menu{display:flex;gap:1.2rem;align-items:center}.site-navbar .nav a,.site-navbar .nav a:visited,.site-navbar .nav a:hover,.site-navbar .nav a:active{color:inherit;text-decoration:none}.site-navbar .menu a{transition:transform .18s ease,opacity .18s ease}.site-navbar .menu a:hover{opacity:.75;transform:translateY(-1px)}.site-navbar .theme-btn{border:0;background:transparent;color:inherit;font:inherit;padding:0;cursor:pointer;transition:transform .18s ease,opacity .18s ease}.site-navbar .theme-btn:hover{opacity:.75;transform:translateY(-1px)}.site-navbar .snack-toggle{display:none;border:0;background:transparent;padding:.1rem 0;cursor:pointer}.site-navbar .snack-icon{display:flex;flex-direction:column;gap:9px}.site-navbar .snack-icon span{width:90px;height:4px;border-radius:999px;background:var(--ink)}.site-navbar .mobile-panel{margin-top:.8rem;border:0;padding:.8rem 1rem;max-height:0;opacity:0;overflow:hidden;pointer-events:none;transform:translateY(-4px);transition:max-height .24s ease,opacity .18s ease,transform .22s ease}.site-navbar .mobile-panel a,.site-navbar .mobile-panel button{display:block;margin:0 0 .6rem;color:inherit;text-decoration:none;font:inherit;background:transparent;border:0;padding:0;cursor:pointer}.site-navbar .mobile-panel button{margin:0}.site-navbar.nav-wrap[data-open=true] .mobile-panel{max-height:220px;opacity:1;pointer-events:auto;transform:translateY(0)}@media(max-width:720px){.site-navbar.nav-wrap{margin-bottom:2rem}.site-navbar .menu,.site-navbar .theme-btn.desktop{display:none}.site-navbar .snack-toggle{display:block}}
+@font-face{font-family:Virgil;src:url(/fonts/Virgil.woff2) format("woff2"),local("Virgil");font-display:swap}:root{--bg: #efefef;--ink: #252525;--muted: #6d6d6d}html[data-theme=dark]{--bg: #1f2125;--ink: #d7d9dd;--muted: #9ea3aa}*{box-sizing:border-box}body{margin:0;padding:1.25rem;background:var(--bg);color:var(--ink);font-family:Virgil,Comic Sans MS,cursive}a{color:inherit;text-decoration:none}.frame{min-height:94vh;display:flex;flex-direction:column;padding:2rem 0 3rem}.section-title{max-width:560px;width:100%;margin:.6rem auto .4rem;display:flex;align-items:center;gap:1rem}.section-title h1{margin:0;font-size:2.25rem;font-weight:400;line-height:1.05}.section-divider{flex:1;height:38px}.grid{max-width:560px;margin:1rem auto 0;display:grid;grid-template-columns:1fr;row-gap:1.15rem}.item{display:block}.card{padding:.7rem}.image-box{border-radius:24px;overflow:hidden;aspect-ratio:16 / 10}.image-box img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) contrast(1.03)}.meta{margin-top:.75rem}.row{display:flex;justify-content:space-between;gap:.8rem;align-items:baseline}.title{margin:0;font-size:1.15rem;line-height:1.3}.year{color:var(--muted);font-size:.95rem}.summary{margin:.45rem 0 .6rem;line-height:1.4;color:color-mix(in oklab,var(--ink) 88%,var(--bg))}.tags{display:flex;gap:.45rem;flex-wrap:wrap}.tag{border-radius:7px;padding:.1rem .45rem;font-size:.8rem;letter-spacing:.01em;color:var(--muted)}.pager-wrap{max-width:560px;width:100%;margin:auto auto 0}.pager-line{width:100%;height:28px;margin:1rem 0 .25rem}.pager{text-align:center;font-size:1.1rem;padding-bottom:.4rem}@media(max-width:900px){.section-title h1{font-size:1.85rem}}
+</style></head> <body> <main class="frame"> <div class="site-navbar nav-wrap" id="nav-wrap"> <nav class="nav"> <a class="brand" href="/">binaryash</a> <div class="menu"> <a href="/projects">projects</a> <a href="/blog">blog</a> <a href="/#about">about</a> <button class="theme-btn desktop" type="button" data-theme-toggle>theme</button> </div> <button id="snack-toggle" class="snack-toggle" type="button" aria-label="Toggle menu" aria-expanded="false"> <span class="snack-icon" aria-hidden="true"> <span></span> <span></span> <span></span> </span> </button> </nav> <div class="mobile-panel"> <a href="/projects">projects</a> <a href="/blog">blog</a> <a href="/#about">about</a> <button type="button" data-theme-toggle>theme</button> </div> </div>  <section class="section-title"> <h1>All Projects</h1> <svg class="section-divider" viewBox="0 0 1000 38" preserveAspectRatio="none" aria-hidden="true"></svg> </section> <section class="grid"> <a class="item" href="/projects/kp-tui"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=902" alt="KP - A KeePassXC TUI" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">KP - A KeePassXC TUI</p> <span class="year">2026</span> </div> <p class="summary">KP - A KeePassXC TUI</p> <div class="tags"> <span class="tag">tui</span> </div> </div> </article> </a><a class="item" href="/projects/realtime-chat-app"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=1978" alt="The Concept" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">The Concept</p> <span class="year">2026</span> </div> <p class="summary">The Concept</p> <div class="tags"> <span class="tag">realtime</span><span class="tag">chat</span><span class="tag">app</span> </div> </div> </article> </a><a class="item" href="/projects/redbud-ems"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=1300" alt="Overview" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">Overview</p> <span class="year">2026</span> </div> <p class="summary">Overview</p> <div class="tags"> <span class="tag">redbud</span><span class="tag">ems</span> </div> </div> </article> </a><a class="item" href="/projects/shopify-mern"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=1549" alt="E-Commerce Platform" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">E-Commerce Platform</p> <span class="year">2026</span> </div> <p class="summary">E-Commerce Platform</p> <div class="tags"> <span class="tag">shopify</span><span class="tag">mern</span> </div> </div> </article> </a><a class="item" href="/projects/job-fetcher"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=1397" alt="Project Concept" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">Project Concept</p> <span class="year">2026</span> </div> <p class="summary">Project Concept</p> <div class="tags"> <span class="tag">job</span><span class="tag">fetcher</span> </div> </div> </article> </a><a class="item" href="/projects/movie-recommendation"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=2382" alt="Recommendation Engine" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">Recommendation Engine</p> <span class="year">2026</span> </div> <p class="summary">Recommendation Engine</p> <div class="tags"> <span class="tag">movie</span><span class="tag">recommendation</span> </div> </div> </article> </a><a class="item" href="/projects/rag-project"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=1418" alt="Retrieval-Augmented Generation" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">Retrieval-Augmented Generation</p> <span class="year">2026</span> </div> <p class="summary">Retrieval-Augmented Generation</p> <div class="tags"> <span class="tag">rag</span><span class="tag">project</span> </div> </div> </article> </a><a class="item" href="/projects/async-task-manager"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=2098" alt="Background Job Processing" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">Background Job Processing</p> <span class="year">2026</span> </div> <p class="summary">Background Job Processing</p> <div class="tags"> <span class="tag">async</span><span class="tag">task</span><span class="tag">manager</span> </div> </div> </article> </a><a class="item" href="/projects/college-management-system"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=2851" alt="Overview" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">Overview</p> <span class="year">2026</span> </div> <p class="summary">Overview</p> <div class="tags"> <span class="tag">college</span><span class="tag">management</span><span class="tag">system</span> </div> </div> </article> </a><a class="item" href="/projects/event-management-mern"> <article class="card"> <div class="image-box"> <img src="https://picsum.photos/900/560?random=2423" alt="Project Overview" loading="lazy" decoding="async"> </div> <div class="meta"> <div class="row"> <p class="title">Project Overview</p> <span class="year">2026</span> </div> <p class="summary">Project Overview</p> <div class="tags"> <span class="tag">event</span><span class="tag">management</span><span class="tag">mern</span> </div> </div> </article> </a> </section> <footer class="pager-wrap"> <svg class="pager-line" viewBox="0 0 1000 28" preserveAspectRatio="none" aria-hidden="true"></svg> <div class="pager"> <span>page 1/2</span>   <a href="/projects/page/2">next</a> </div> </footer> </main> <script src="/vendor/rough.js"></script> <script>
+      const divider = document.querySelector(".section-divider");
+      const pagerLine = document.querySelector(".pager-line");
+
+      const drawLine = (el, seed) => {
+        if (!el || !window.rough) return;
+        el.innerHTML = "";
+        const rc = window.rough.svg(el);
+        const stroke = getComputedStyle(document.documentElement)
+          .getPropertyValue("--ink")
+          .trim();
+        el.appendChild(
+          rc.line(8, 20, 990, 18, {
+            seed,
+            stroke,
+            strokeWidth: 0.9,
+            roughness: 1.5,
+            bowing: 2.1,
+          })
+        );
+      };
+
+      if (window.rough) {
+        drawLine(divider, 201);
+        drawLine(pagerLine, 301);
+
+        const ro = new ResizeObserver(() => {
+          drawLine(divider, 201);
+          drawLine(pagerLine, 301);
+        });
+        if (divider) ro.observe(divider);
+        if (pagerLine) ro.observe(pagerLine);
+
+        const root = document.documentElement;
+        const toggles = () => document.querySelectorAll("[data-theme-toggle]");
+        const setTheme = (theme) => {
+          root.setAttribute("data-theme", theme);
+          try {
+            localStorage.setItem("theme", theme);
+          } catch {}
+          toggles().forEach((btn) => {
+            btn.textContent = `theme: ${theme === "dark" ? "Light" : "Dark"}`;
+          });
+          drawLine(divider, 201);
+          drawLine(pagerLine, 301);
+        };
+
+        setTheme(root.getAttribute("data-theme") || "light");
+
+        document.addEventListener("click", (event) => {
+          const target = event.target;
+          if (!(target instanceof Element)) return;
+          const button = target.closest("[data-theme-toggle]");
+          if (!button) return;
+          const next = (root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark";
+          setTheme(next);
+        });
+
+        const snackToggle = document.getElementById("snack-toggle");
+        const navWrap = document.getElementById("nav-wrap");
+        snackToggle?.addEventListener("click", () => {
+          const open = navWrap?.dataset.open === "true";
+          const next = !open;
+          if (navWrap) navWrap.dataset.open = String(next);
+          snackToggle.setAttribute("aria-expanded", String(next));
+        });
+      }
+    </script> </body> </html>
