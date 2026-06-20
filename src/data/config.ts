@@ -3,7 +3,7 @@ import type { SiteConfig } from "./types";
 export const config: SiteConfig = {
   profile: {
     name: "Binary Ash",
-    title: "Full-Stack, AI & Embedded Engineer",
+    title: "Software Architect & Multi-Disciplinary Engineer",
     avatar: "/image.png",
     email: "binaryash@hotmail.com",
     bioFile: "/content/profile/bio.md",
@@ -31,6 +31,11 @@ export const config: SiteConfig = {
       "PostgreSQL",
       "Redis",
       "Celery",
+      "Web3",
+      "Flutter",
+      "Go",
+      "Software Architecture",
+      "Cross-Platform",
     ],
     socials: [
       {
@@ -231,6 +236,15 @@ export const config: SiteConfig = {
     },
   ],
   blog: [
+    {
+      id: "writing-smart-contracts",
+      title: "Writing Smart Contracts: Code That Lives on the Blockchain",
+      excerpt: "What changes when your code is immutable, public, and runs without a server. A practical look at Solidity, gas, and security.",
+      date: "Jun 20, 2026",
+      readTime: "6 min read",
+      tags: ["Web3", "Solidity", "Blockchain", "Smart Contracts"],
+      contentFile: "/content/blog/writing-smart-contracts.md",
+    },
     {
       id: "kp-tui-launch",
       title: "Building KP: A Lightning-Fast TUI for KeePassXC",
